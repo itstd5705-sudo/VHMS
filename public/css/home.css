@@ -1,0 +1,100 @@
+/* خلفية ناعمة */
+body {
+    background: #f4f7ff;
+    font-family: "Tajawal", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* حاوية عامة */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 15px;
+}
+
+/* العنوان */
+.page-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 35px;
+}
+
+/* الكارد (بوكس) */
+.box-card {
+    background: #ffffff;
+    border-radius: 12px; /* حواف ناعمة */
+    border: 1px solid #e6e9f0;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    transition: 0.25s ease-in-out;
+}
+
+.box-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* الصورة داخل البوكس */
+.box-card img {
+    width: 100%;
+    height: 230px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* اسم الدواء أو القسم */
+.box-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #233142;
+    margin-bottom: 8px;
+}
+
+/* الوصف */
+.box-text {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+/* الأزرار ناعمة دائرية */
+.btn-main {
+    display: block;
+    width: 100%;
+    background: #099aa7; /* تم تغييره */
+    color: #fff;
+    border: none;
+    border-radius: 50px; /* زر كبسولة */
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    transition: .25s;
+}
+
+.btn-main:hover {
+    background: #057d8a; /* تم تغييره للـ hover */
+}
+
+/* زر شفاف */
+.btn-outline {
+    display: block;
+    width: 100%;
+    border-radius: 50px;
+    padding: 12px 0;
+    font-size: 16px;
+    border: 2px solid #099aa7; /* تم تغييره */
+    color: #099aa7; /* تم تغييره */
+    font-weight: 600;
+    background: transparent;
+    transition: .25s;
+}
+
+.btn-outline:hover {
+    background: #099aa7; /* تم تغييره */
+    color: #fff;
+}

@@ -1,0 +1,88 @@
+/* زر السلة العائم */
+.floating-cart {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: linear-gradient(135deg, #1abc9c, #16a085);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 50px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    z-index: 9999;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.floating-cart:hover {
+    background: linear-gradient(135deg, #16a085, #1abc9c);
+    transform: translateY(-3px) scale(1.05);
+}
+.cart-count {
+    background: white;
+    color: #16a085;
+    padding: 3px 8px;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* كروت الأدوية */
+.med-card {
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+.med-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+/* الصورة كاملة في وسط البطاقة */
+.med-img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+/* أزرار الكمية */
+.quantity-box button {
+    width: 30px;
+}
+.quantity-box input {
+    width: 50px;
+    font-size: 0.9rem;
+}
+
+/* زر إضافة للسلة */
+.btn-add-to-cart {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+.btn-add-to-cart:hover {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+    transform: scale(1.05);
+}
+
+/* صورة الدواء الطائر */
+.flying-med {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 10000;
+    transition: transform 0.8s cubic-bezier(0.65, -0.6, 0.35, 1.6), opacity 0.8s;
+}

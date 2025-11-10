@@ -1,0 +1,150 @@
+/* Body and General Styles */
+body {
+    background-color: #ecf0f1;
+    font-family: "Cairo", sans-serif;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Sidebar Styling (Positioning) */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #2c3e50, #34495e);
+    color: #ecf0f1;
+    padding: 20px;
+    position: fixed; /* تثبيت الشريط الجانبي */
+    top: 0;
+    bottom: 0;
+    right: 0; /* تثبيت على اليمين ليتناسب مع RTL */
+    overflow-y: auto;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.sidebar h4 {
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 2px solid #16a085;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+    font-size: 1.3rem;
+}
+
+.sidebar-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 15px 0;
+}
+
+/* Sidebar Links */
+.sidebar .nav-link {
+    color: #ecf0f1;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.sidebar .nav-link i {
+    margin-left: 10px; /* مسافة للأيقونة من اليمين */
+    font-size: 1.3rem;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: #16a085;
+    color: #fff;
+    transform: translateX(-6px);
+}
+
+/* Main Content Area */
+.main-content {
+    /* إزاحة المحتوى الرئيسي إلى اليسار بقدر عرض الشريط الجانبي */
+    margin-right: 250px;
+    padding: 40px 30px;
+    min-height: 100vh;
+    transition: margin 0.3s ease;
+    width: calc(100% - 250px); /* يضمن عدم تداخل المحتوى */
+}
+
+.content-box {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+}
+
+h2 {
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* Dashboard Cards (تنسيقات لوحة التحكم) */
+.dashboard-card {
+    border-radius: 15px;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+}
+
+/* (بقية تنسيقات البطاقات والألوان هنا...) */
+.dashboard-card i { font-size: 2.3rem; margin-bottom: 10px; }
+.dashboard-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.25); }
+.dashboard-card h5 { font-weight: 600; margin-bottom: 10px; font-size: 1.2rem; }
+.dashboard-card .count { font-size: 2rem; font-weight: bold; margin-bottom: 5px; }
+
+.dashboard-btn {
+    background-color: rgba(255,255,255,0.2);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.dashboard-btn:hover {
+    background-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* Color Classes */
+.bg-primary-blue { background-color: #3498db; }
+.bg-success-green { background-color: #2ecc71; }
+.bg-warning-yellow { background-color: #f1c40f; color: #2c3e50!important; }
+.bg-info-teal { background-color: #1abc9c; }
+.bg-secondary-gray { background-color: #7f8c8d; }
+.bg-danger-red { background-color: #e74c3c; }
+.bg-purple-violet { background-color: #9b59b6; }
+
+
+/* Media Queries for Responsiveness */
+@media (max-width: 992px) {
+    .sidebar {
+        position: relative; /* إزالة التثبيت */
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+        right: auto;
+        top: auto;
+    }
+    .main-content {
+        margin-right: 0; /* إلغاء الإزاحة */
+        padding: 20px;
+        width: 100%;
+    }
+}

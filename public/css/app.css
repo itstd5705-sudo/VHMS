@@ -1,0 +1,179 @@
+/* ---------------------- */
+/*  Root Colors & Default */
+/* ---------------------- */
+:root {
+  --primary-color: #099aa7;   /* اللون الأساسي */
+  --secondary-color: #057d8a; /* درجة أغمق للـhover */
+  --dark-color: #055f6b;      /* خيار للألوان الداكنة */
+  --light-color: #F8F9FA;
+  --footer-color: #099aa7;    /* لون الفوتر */
+  --radius: 8px;
+  --transition: 0.3s ease-in-out;
+  --text-color: #1a1a1a;
+  --font-size: 14px; /* تصغير الخط */
+}
+
+/* ---------------------- */
+/*  Global Reset          */
+/* ---------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-size: var(--font-size);
+}
+
+body {
+  background: #fff;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* ---------------------- */
+/*  Navbar Styling        */
+/* ---------------------- */
+.medinest-header {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+.navbar .navbar-nav .nav-link {
+  color: #333 !important;
+  font-weight: 500;
+  padding: 8px 12px;
+  transition: var(--transition);
+}
+
+.navbar .navbar-nav .nav-link:hover {
+  color: var(--primary-color) !important;
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--primary-color) !important;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------------------- */
+/*  Buttons Styling       */
+/* ---------------------- */
+.medinest-btn-appointment {
+  background: var(--primary-color) !important;
+  color: #fff !important;
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(0, 119, 182, 0.45);
+  transition: var(--transition);
+}
+
+.medinest-btn-appointment:hover {
+  background: var(--secondary-color) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 150, 199, 0.55);
+}
+
+.btn-danger {
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  background: #d62828;
+  border: none;
+  box-shadow: 0 4px 10px rgba(214, 40, 40, 0.3);
+  transition: var(--transition);
+}
+
+.btn-danger:hover {
+  background: #b81f1f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(214, 40, 40, 0.45);
+}
+
+.btn-outline-secondary {
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-outline-secondary:hover {.navbar .navbar-nav .nav-link {
+  color: #333 !important;
+  font-weight: 500;
+  padding: 8px 12px;
+  transition: var(--transition);
+}
+
+.navbar .navbar-nav .nav-link:hover {
+  color: var(--primary-color) !important;
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--primary-color) !important;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+  background: var(--primary-color);
+  color: #fff !important;
+}
+
+/* ---------------------- */
+/*  Footer Styling        */
+/* ---------------------- */
+.medinest-footer {
+  background-color: var(--footer-color);
+  color: #fff;
+  padding: 40px 0;
+  font-size: 13px;
+}
+
+.medinest-footer a {
+  color: #fff;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.medinest-footer a:hover {
+  color: var(--secondary-color);
+}
+
+.medinest-footer h4 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.medinest-footer .medinest-social-links a {
+  color: #fff;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.medinest-copyright {
+  background: rgba(0, 0, 0, 0.05);
+  color: #fff;
+  font-size: 12px;
+}
+
+/* ---------------------- */
+/*  Responsive Navbar     */
+/* ---------------------- */
+@media (max-width: 991px) {
+  .navbar-nav {
+    margin-top: 15px;
+  }
+
+  .medinest-btn-appointment {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,33 @@
+.contact-section {
+    background: #f8f9fa;
+    padding: 80px 0;
+}
+
+.contact-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.medinest-map-wrapper iframe {
+    border-radius: 10px;
+}
+
+.contact-section form .form-control {
+    border-radius: 8px;
+}
+
+/* زر إرسال */
+.contact-section button {
+    border-radius: 8px;
+    font-weight: 600;
+    background-color: #099aa7; /* اللون الأساسي */
+    border: 1px solid #099aa7; /* نفس اللون للحدود */
+    color: #fff;
+    transition: 0.3s;
+}
+
+.contact-section button:hover {
+    background-color: #057d8a; /* درجة أغمق للـhover */
+    border-color: #057d8a;
+}

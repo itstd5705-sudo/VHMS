@@ -1,0 +1,57 @@
+/* ========================== */
+/*       Unified Titles & Paragraphs        */
+/* ========================== */
+
+/* العناوين الرئيسية H2 */
+h2 {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    color: #099aa7;       /* اللون الرئيسي */
+    font-size: 2.2rem;    /* حجم العنوان */
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+/* العناوين الثانوية H3 */
+h3 {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 600;
+    color: #099aa7;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+/* الفقرات P */
+p {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 400;
+    color: #4c5977;       /* لون النص */
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+/* فقرة صغيرة أو وصف مختصر */
+p.small {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* مركزية العناوين عند الحاجة */
+.text-center h2,
+.text-center h3 {
+    text-align: center;
+}
+
+/* إضافات خفيفة لجعل العنوان أكثر بروزاً */
+h2::after,
+h3::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #099aa7;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}

@@ -1,0 +1,101 @@
+/* ========================== */
+/*       Search Wrapper       */
+/* ========================== */
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.search-wrapper input[type="text"] {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 300px;
+    transition: all 0.3s;
+}
+
+.search-wrapper input[type="text"]:focus {
+    outline: none;
+    border-color: #1abc9c;
+    box-shadow: 0 0 5px #1abc9c33;
+}
+
+.search-wrapper button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.search-wrapper .btn-search {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.search-wrapper .btn-search:hover {
+    background-color: #16a085;
+}
+
+.search-wrapper .btn-filter {
+    background-color: #3498db;
+    color: white;
+}
+
+.search-wrapper .btn-filter:hover {
+    background-color: #2980b9;
+}
+
+/* ========================== */
+/*       Cards Styling        */
+/* ========================== */
+.card-custom {
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+}
+
+.card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+
+.card-custom .card-body {
+    padding: 20px;
+}
+
+.card-custom h5 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.card-custom p {
+    font-size: 0.95rem;
+}
+
+/* ========================== */
+/*       Section Titles       */
+/* ========================== */
+.section-title {
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-left: 4px solid #1abc9c;
+    padding-left: 10px;
+    color: #1abc9c;
+}
+
+/* ========================== */
+/*       Hero Section         */
+/* ========================== */
+.about-hero-section .hero-title {
+    font-weight: 700;
+    color: #1abc9c;
+}
+
+.about-hero-section .hero-description {
+    color: #555;
+}
