@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+
 
 
 class Admin extends Authenticatable
@@ -14,12 +14,6 @@ class Admin extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
      protected $fillable =
     [
         'userName',
@@ -50,19 +44,5 @@ class Admin extends Authenticatable
         ];
     }
 
-    /**
-     * Get the identifier that will be stored in the JWT token.
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
 
-    /**
-     * Return an array with custom claims to be added to the JWT token.
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 }

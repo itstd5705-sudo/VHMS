@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
-use App\Models\Appointment;
 use App\Models\Booking;
-use App\Models\Doctor;
-use App\Models\Order;
-use Carbon\Carbon;
+
 
 class EmployeeDashBoardController extends Controller
 {
@@ -20,10 +17,23 @@ class EmployeeDashBoardController extends Controller
         // أحدث الحجوزات (آخر 5 فقط)
         $recentBookings = Booking::latest()->take(5)->get();
 
+         // ---- بيانات الشارت ----
+        $bookingsPerMonth = Booking::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+        ->groupBy('month')
+        ->orderBy('month')
+        ->pluck('total', 'month');
+
+        $patientsPerMonth = Booking::selectRaw('MONTH(created_at) as month, COUNT(DISTINCT userId) as total')
+        ->groupBy('month')
+        ->orderBy('month')
+        ->pluck('total', 'month');
+
         return view('Employee.dashboard', compact(
             'pendingBookings',
             'totalPatients',
             'recentBookings',
+            'bookingsPerMonth',
+            'patientsPerMonth',
         ));
     }
 }
