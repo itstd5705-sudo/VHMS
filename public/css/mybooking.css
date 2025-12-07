@@ -1,0 +1,130 @@
+/* ====== Bookings Page Style ====== */
+.container {
+    max-width: 1200px;
+}
+
+/* Title */
+h3 {
+    color: #086378;
+    letter-spacing: 0.5px;
+}
+
+/* Cards Style */
+.card {
+    background: #ffffff;
+    border-radius: 20px !important;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effect */
+.hover-shadow:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Doctor Name */
+.card h5 {
+    font-size: 1.1rem;
+    color: #148994;
+}
+
+/* Status Badges */
+.badge {
+    padding: 7px 14px;
+    font-size: 0.8rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+/* Booking Details */
+.card ul li {
+    font-size: 0.95rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+}
+
+.card ul li i {
+    font-size: 1.1rem;
+    color: #148994 !important;
+}
+
+/* Price */
+.card ul li strong {
+    color: #000;
+}
+
+/* Back Button */
+.card .btn-primary {
+    background-color: #148994;
+    border: none;
+    border-radius: 50px;
+    padding: 12px;
+    font-size: 0.95rem;
+    transition: 0.3s ease;
+}
+
+.card .btn-primary:hover {
+    background-color: #086378;
+    transform: scale(1.02);
+}
+
+/* Alert message */
+.alert-info {
+    background: rgba(20, 137, 148, 0.1);
+    border: none;
+    color: #086378;
+    border-radius: 15px;
+    font-weight: 600;
+}
+
+/* Skeleton base */
+.skeleton-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.skeleton {
+    background: linear-gradient(
+        110deg,
+        #e2e2e2 8%,
+        #f0f0f0 18%,
+        #e2e2e2 33%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+    border-radius: 8px;
+}
+
+@keyframes shimmer {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+.skeleton-title {
+    height: 20px;
+    width: 70%;
+    margin-bottom: 15px;
+}
+
+.skeleton-line {
+    height: 14px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.skeleton-small {
+    width: 60%;
+}
+
+.skeleton-btn {
+    height: 40px;
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 30px;
+}
+

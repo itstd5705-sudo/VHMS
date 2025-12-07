@@ -9,7 +9,8 @@ class Category extends Model
     protected $fillable=
     [
         'name',
-        'imgUrl'
+        'imgUrl',
+        'description'
     ];
 
    public function medications()

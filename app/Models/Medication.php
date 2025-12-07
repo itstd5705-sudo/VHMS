@@ -18,10 +18,6 @@ class Medication extends Model
     ];
     public function category()
     {
-        return $this->belongsTo(Category::class, 'categoryId'); // تأكد من العمود هنا
+        return $this->belongsTo(Category::class, 'categoryId');
     }
-
-
-
-
 }

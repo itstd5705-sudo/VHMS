@@ -1,34 +1,172 @@
-.btn-gradient-primary {
-    background: linear-gradient(135deg, #099aa7, #087e8f);
-    color: white;
+/* ======================= Pharmacy Card Small Image ======================= */
+.med-card {
+    display: flex;
+    flex-direction: row; /* صورة ونص جنب بعض */
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+.med-card:hover {
+    transform: translateY(-3px);
+}
+
+.med-img-small {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+.card-body {
+    padding: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 1rem;
     font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.text-success {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.quantity-box .form-control {
+    width: 50px;
+    font-size: 0.9rem;
+    padding: 2px 5px;
+}
+
+.btn-add-to-cart {
+    border-radius: 50px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Flying image animation */
+.flying-med {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.8s cubic-bezier(0.4,0,0.2,1), opacity 0.8s;
+}
+
+/* Floating Cart */
+.floating-cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #099aa7;
+    color: #fff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 1000;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ff3d00;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+.cart-count.bump {
+    animation: bump 0.5s;
+}
+
+@keyframes bump {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+/* ======================= Cart Buttons ======================= */
+.cart-card .btn-outline-success,
+.cart-card .btn-outline-danger {
+    flex: 1;                  /* الزر يملأ نفس المساحة */
+    height: 38px;             /* ارتفاع موحد */
+    font-size: 0.9rem;        /* حجم الخط */
+    font-weight: 600;
+    border-radius: 50px;      /* حواف مستديرة */
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
 }
-.btn-gradient-primary:hover {
-    background: linear-gradient(135deg, #087e8f, #099aa7);
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
-.btn-outline-success:hover {
-    background: #28a745;
-    color: white;
+
+/* اللون عند المرور على زر التحديث */
+.cart-card .btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
     border-color: #28a745;
 }
-.btn-outline-danger:hover {
-    background: #dc3545;
-    color: white;
+
+/* اللون عند المرور على زر الحذف */
+.cart-card .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
     border-color: #dc3545;
 }
-.table tbody tr.table-row-hover {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+/* ترتيبهم جنب بعض مع مسافة متساوية */
+.cart-card .d-flex.gap-2 {
+    gap: 10px;  /* المسافة بين الزرين */
 }
-.table tbody tr.table-row-hover:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    background-color: #f9f9f9;
+.cart-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-input.form-control {
-    border-width: 2px;
-    border-radius: 50px;
+
+.med-img-small {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.quantity-input {
+    width: 60px;
+}
+
+.btn-qty {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    font-weight: bold;
+}
+
+.btn-outline-success, .btn-outline-danger {
+    font-size: 0.9rem;
 }

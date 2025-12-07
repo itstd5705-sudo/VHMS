@@ -1,0 +1,43 @@
+/* doctor.css */
+
+/* صورة الدكتور */
+.doctor-img {
+    height: 180px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 15px 15px 0 0;
+}
+
+/* أزرار info */
+.btn-info {
+    background: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+}
+
+/* صندوق المواعيد */
+.bg-light {
+    min-width: 100%;
+}
+
+/* نصوص صغيرة في المواعيد */
+.appointment-day {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+.appointment-time {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* عدد المتبقي */
+.remaining {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* زر الحجز */
+.btn-sm {
+    font-size: 0.75rem !important;
+    padding: 2px 8px !important;
+}

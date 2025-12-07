@@ -2,260 +2,164 @@
 
 use Illuminate\Support\Facades\Route;
 
+//-----------------------------------------------------
+// Controllers
+//-----------------------------------------------------
+
 // Auth Controllers
 use App\Http\Controllers\Auth\authController;
 
-// Admin Controllers
-use App\Http\Controllers\Admin\employeeController;
-use App\Http\Controllers\Admin\doctorController;
-use App\Http\Controllers\Admin\departmentController;
-use App\Http\Controllers\Admin\categoryController;
-use App\Http\Controllers\Admin\medicationController;
-use App\Http\Controllers\Admin\appointmentController;
-use App\Http\Controllers\Admin\bookingController;
-use App\Http\Controllers\Admin\dashController;
-use App\Http\Controllers\Admin\LabController;
-use App\Http\Controllers\Admin\TestController;
-use App\Http\Controllers\Admin\DeviceController;
-
 // Employee Controllers
-use App\Http\Controllers\Employee\empbookingController;
-use App\Http\Controllers\Employee\employeeBookingController;
-use App\Http\Controllers\Employee\employeeDashBoardController;
+use App\Http\Controllers\Employee\employeeLogin;
 use App\Http\Controllers\Employee\PublicBookingController;
+use App\Http\Controllers\Employee\CheckListController;
+
+// Doctor Controllers
+use App\Http\Controllers\Doctor\DoctorDashboardController;
+use App\Http\Controllers\Doctor\doctorLogin;
 
 // User Controllers
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserPharmacyController;
 use App\Http\Controllers\User\cartController;
 use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\User\UserBookingController;
 
-// Visitor
-use App\Http\Controllers\Visitor\AnalysisController;
+// Visitor Controllers
+use App\Http\Controllers\Visitor\departmentViewController;
+use App\Http\Controllers\Visitor\CategoryController;
+use App\Http\Controllers\Visitor\DoctorController;
 
-
-//-----------------------------------------------------
-// Home Page
-//-----------------------------------------------------
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
+// Filament Dashboard
+use Filament\Pages\Dashboard as FilamentDashboard;
 
 //-----------------------------------------------------
-// User Login & Register
+// Home
+//-----------------------------------------------------
+Route::get('/', fn() => view('home'))->name('home');
+
+//-----------------------------------------------------
+// User Auth
 //-----------------------------------------------------
 Route::get('/login', [authController::class, 'userLogin'])->name('user.login.form');
 Route::post('/login', [authController::class, 'userCheckLogin'])->name('user.login');
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register.form');
-Route::post('/register', [authController::class, 'store'])->name('register');
+Route::get('/register', fn() => view('auth.register'))->name('register.form');
+Route::post('/register', [authController::class, 'register'])->name('register');
 
-
-//-----------------------------------------------------
-// User Logout (يحتاج تسجيل دخول)
-//-----------------------------------------------------
 Route::middleware('auth:web')->post('/logout', [authController::class, 'logout'])->name('logout');
 
-
 //-----------------------------------------------------
-// User Routes (صفحات المحجوزات الخاصة بالمستخدم)
+// User Profile + Wallet + Bookings
 //-----------------------------------------------------
 Route::middleware('auth:web')->group(function () {
-    Route::get('/my-bookings', [BookingController::class, 'myBookings'])->name('user.booking.myBookings');
+
+    Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [UserController::class, 'update'])->name('profile.update');
+
+    Route::post('/wallet/charge', [UserController::class, 'chargeWallet'])->name('wallet.charge');
+
+    Route::get('/my-bookings', [UserBookingController::class, 'myBookings'])
+        ->name('user.booking.myBookings');
+
 });
 
-
 //-----------------------------------------------------
-// Pharmacy (بدون تسجيل دخول)
+// Pharmacy
 //-----------------------------------------------------
 Route::prefix('pharmacy')->group(function () {
 
-    // صيدلية – صفحات عامة مفتوحة
+    // Public
     Route::get('/', [UserPharmacyController::class, 'index'])->name('pharmacy.index');
     Route::get('/all', [UserPharmacyController::class, 'allMedications'])->name('pharmacy.all');
     Route::get('/category/{id}', [UserPharmacyController::class, 'showCategory'])->name('pharmacy.category');
     Route::get('/medication/{id}', [UserPharmacyController::class, 'showMedication'])->name('pharmacy.showMedication');
+    Route::get('/pharmacy/search', [UserPharmacyController::class, 'search'])->name('pharmacy.search');
 
-    // السلة والطلبات – تحتاج تسجيل دخول
+    // Requires Auth
     Route::middleware('auth:web')->group(function () {
 
-        // Cart
         Route::get('/cart', [cartController::class, 'index'])->name('pharmacy.cart');
         Route::post('/add-to-cart/{id}', [cartController::class, 'addToCart'])->name('pharmacy.addToCart');
         Route::put('/update-cart/{id}', [cartController::class, 'updateCart'])->name('pharmacy.updateCart');
         Route::delete('/remove-from-cart/{id}', [cartController::class, 'removeFromCart'])->name('pharmacy.removeFromCart');
 
-        // Orders
+        // Wallet Checkout
+        Route::post('/checkout-wallet', [CartController::class, 'checkoutWallet'])->name('pharmacy.checkoutWallet');
+        Route::get('/pharmacy/confirmation', fn() => view('user.pharmacy.confirmation'))->name('pharmacy.confirmation');
+        Route::get('/user/my-orders', [CartController::class, 'myOrders'])->name('user.myOrders');
+
         Route::get('/orders', [OrderController::class, 'orders'])->name('pharmacy.orders');
         Route::get('/checkout', [UserPharmacyController::class, 'checkoutPage'])->name('pharmacy.checkoutPage');
         Route::post('/checkout', [UserPharmacyController::class, 'checkout'])->name('pharmacy.checkout');
+
     });
 });
 
+//-----------------------------------------------------
+// Queue Status
+//-----------------------------------------------------
+Route::get('/queue-status/{appointmentId}', [UserBookingController::class, 'queueStatus'])
+    ->name('user.queueStatus');
 
 //-----------------------------------------------------
 // Static Pages
 //-----------------------------------------------------
-Route::get('/about', function () { return view('about'); })->name('about');
-Route::get('/contact', function () { return view('contact'); })->name('contact');
-Route::get('/services', function () { return view('services'); })->name('services');
-
-
-//-----------------------------------------------------
-// Analysis Page
-//-----------------------------------------------------
-Route::get('/Analysis', [AnalysisController::class, 'index'])->name('analyses.index');
+Route::view('/about', 'about')->name('about');
+Route::view('/contact', 'contact')->name('contact');
+Route::view('/services', 'services')->name('services');
+Route::view('/Analysis', 'Analysis')->name('analyses');
 
 //-----------------------------------------------------
-// Staff Login (Admin, Doctor, Employee)
+// Doctors (Visitor)
 //-----------------------------------------------------
-Route::get('/staff/login', [authController::class, 'staffLogin'])->name('staff.login.form');
-Route::post('/staff/login', [authController::class, 'staffCheckLogin'])->name('staff.login');
-
-
-//-----------------------------------------------------
-// Staff Logout (Admin/Employee)
-//-----------------------------------------------------
-Route::post('/logout', [authController::class, 'logout'])->name('logout');
-
+Route::get('/doctors}/{doctor}/appointments-json', [DoctorController::class, 'appointmentsJson']);
+Route::get('/doctor/{id}/appointments', [DoctorController::class, 'appointments'])->name('doctor.appointments');
+Route::get('/doctors/search', [DoctorController::class, 'search'])->name('doctors.search');
 
 //-----------------------------------------------------
-// Admin Routes
+// Departments
+//-----------------------------------------------------
+Route::get('/departments', [departmentViewController::class, 'index'])->name('departments.index');
+Route::get('/departments/{id}/doctors', [departmentViewController::class, 'showDoctors'])->name('departments.doctors');
+
+//-----------------------------------------------------
+// Filament Admin
 //-----------------------------------------------------
 Route::middleware('auth:admin')->group(function () {
-
-    Route::get('/Admin/dashboard', [dashController::class, 'index'])->name('admin.dashboard');
-
-    Route::resource('employee', employeeController::class)->names([
-        'index'=>'employee.index',
-        'create'=>'employee.create',
-        'store'=>'employee.store',
-        'edit'=>'employee.edit',
-        'show'=>'employee.show',
-        'update'=>'employee.update',
-        'destroy'=>'employee.destroy'
-    ]);
-
-    Route::resource('/admin/doctor', doctorController::class)->names([
-        'index'=>'Admin.doctor.index',
-        'create'=>'Admin.doctor.create',
-        'store'=>'Admin.doctor.store',
-        'edit'=>'Admin.doctor.edit',
-        'show'=>'Admin.doctor.show',
-        'update'=>'Admin.doctor.update',
-        'destroy'=>'Admin.doctor.destroy'
-    ]);
-
-    Route::resource('department', departmentController::class)->names([
-        'index'=>'department.index',
-        'create'=>'department.create',
-        'store'=>'department.store',
-        'edit'=>'department.edit',
-        'show'=>'department.show',
-        'update'=>'department.update',
-        'destroy'=>'department.destroy'
-    ]);
-
-    Route::resource('category',categoryController::class)->names([
-        'index'=>'category.index',
-        'create'=>'category.create',
-        'store'=>'category.store',
-        'edit'=>'category.edit',
-        'show'=>'category.show',
-        'update'=>'category.update',
-        'destroy'=>'category.destroy'
-    ]);
-
-    Route::resource('medication',medicationController::class)->names([
-        'index'=>'medication.index',
-        'create'=>'medication.create',
-        'store'=>'medication.store',
-        'edit'=>'medication.edit',
-        'show'=>'medication.show',
-        'update'=>'medication.update',
-        'destroy'=>'medication.destroy'
-    ]);
-
-    Route::resource('appointment',appointmentController::class)->names([
-        'index'=>'appointment.index',
-        'create'=>'appointment.create',
-        'store'=>'appointment.store',
-        'edit'=>'appointment.edit',
-        'show'=>'appointment.show',
-        'update'=>'appointment.update',
-        'destroy'=>'appointment.destroy'
-    ]);
-
-    Route::resource('/admin/booking', bookingController::class)->names([
-        'index'=>'Admin.booking.index',
-        'create'=>'Admin.booking.create',
-        'store'=>'Admin.booking.store',
-        'edit'=>'Admin.booking.edit',
-        'show'=>'Admin.booking.show',
-        'update'=>'Admin.booking.update',
-        'destroy'=>'Admin.booking.destroy'
-    ]);
-
-    Route::resource('/admin/lab', LabController::class)->names([
-        'index'=>'Admin.lab.index',
-        'create'=>'Admin.lab.create',
-        'store'=>'Admin.lab.store',
-        'edit'=>'Admin.lab.edit',
-        'show'=>'Admin.lab.show',
-        'update'=>'Admin.lab.update',
-        'destroy'=>'Admin.lab.destroy'
-    ]);
-
-    Route::resource('/admin/Test', TestController::class)->names([
-        'index'=>'Admin.Test.index',
-        'create'=>'Admin.Test.create',
-        'store'=>'Admin.Test.store',
-        'edit'=>'Admin.Test.edit',
-        'show'=>'Admin.Test.show',
-        'update'=>'Admin.Test.update',
-        'destroy'=>'Admin.Test.destroy'
-    ])->parameters([
-        'Test' => 'test'
-    ]);
-
-    Route::resource('/admin/Device', DeviceController::class)->names([
-        'index'=>'Admin.Device.index',
-        'create'=>'Admin.Device.create',
-        'store'=>'Admin.Device.store',
-        'edit'=>'Admin.Device.edit',
-        'show'=>'Admin.Device.show',
-        'update'=>'Admin.Device.update',
-        'destroy'=>'Admin.Device.destroy'
-    ])->parameters([
-        'Device' => 'device'
-    ]);
+    Route::get('/admin/dashboard', fn() => redirect('/admin'))->name('admin.dashboard');
 });
 
+//-----------------------------------------------------
+// Employee
+//-----------------------------------------------------
+Route::get('/employee/login', [employeeLogin::class, 'showLoginForm'])->name('employee.login');
+Route::post('/employee/login', [employeeLogin::class, 'login'])->name('employee.login.post');
+Route::post('/employee/logout', [employeeLogin::class, 'logout'])->name('employee.logout');
 
 //-----------------------------------------------------
-// Employee Routes
+// Doctor Login + Dashboard
 //-----------------------------------------------------
-Route::middleware('auth:employee')->group(function () {
+Route::get('/doctor/login', [doctorLogin::class, 'showLoginForm'])->name('doctor.login');
+Route::post('/doctor/login', [doctorLogin::class, 'login'])->name('doctor.login.post');
+Route::post('/doctor/logout', [doctorLogin::class, 'logout'])->name('doctor.logout');
 
-    Route::get('/Employee/dashboard', [employeeDashBoardController::class, 'index'])->name('employee.dashboard');
-
-    Route::get('/Employee/booking', [employeeBookingController::class, 'index'])->name('Employee.booking');
-
-    Route::resource('/Employee/bookings', empbookingController::class)->names([
-        'index'=>'Employee.booking.index',
-        'create'=>'Employee.booking.create',
-        'store'=>'Employee.booking.store',
-        'edit'=>'Employee.booking.edit',
-        'show'=>'Employee.booking.show',
-        'update'=>'Employee.booking.update',
-        'destroy'=>'Employee.booking.destroy'
-    ]);
-
-    Route::post('/Employee/booking/{id}/approve', [employeeBookingController::class, 'approve'])->name('employee.bookings.approve');
-    Route::post('/Employee/booking/{id}/reject', [employeeBookingController::class, 'reject'])->name('employee.bookings.reject');
-
-    Route::get('/public/bookings', [PublicBookingController::class, 'index'])->name('public.bookings.index');
+Route::middleware('auth:doctor')->group(function () {
+    Route::get('/doctor/dashboard', [DoctorDashboardController::class, 'index'])->name('doctor.dashboard');
 });
 
+//-----------------------------------------------------
+// User Appointment Booking
+//-----------------------------------------------------
+Route::middleware(['auth:web'])->group(function () {
+
+    Route::get('appointment/{id}/book', [UserBookingController::class, 'showBookingForm'])->name('user.book');
+    Route::post('appointment/{id}/confirm', [UserBookingController::class, 'confirmBooking'])->name('user.confirmBooking');
+    Route::post('wallet/recharge', [UserBookingController::class, 'rechargeWallet'])->name('user.rechargeWallet');
+
+    Route::get('booking/{id}/confirm', [UserBookingController::class, 'bookingConfirm'])->name('user.booking.confirm');
+    Route::get('my-bookings', [UserBookingController::class, 'myBookings'])->name('user.booking.myBookings');
+
+    Route::delete('/booking/cancel/{id}', [UserBookingController::class, 'cancelBooking'])
+        ->name('booking.cancel');
+});

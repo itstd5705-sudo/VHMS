@@ -1,135 +1,134 @@
 @extends('layouts.app')
 @section('content')
 
-<section class="about-hero-section py-5 text-center bg-light">
+<section class="mission-vision-section">
     <div class="container">
-        <h2 class="hero-title">About Venice Hospital</h2>
-       <p class="hero-description">
-            Venice Hospital has been a pioneer in healthcare since 1985. Our facility in Benghazi offers state-of-the-art medical services in a patient-friendly environment.
-        </p>
+        <div class="vision-box">
+            <i class="fa-solid fa-eye"></i>
+            <h3>Our Vision</h3>
+            <p>To be the leading global health center, recognized for exceptional patient care, innovative research, and commitment to community wellness.</p>
+        </div>
+        <div class="mission-box">
+            <i class="fa-solid fa-bullseye"></i>
+            <h3>Our Mission</h3>
+            <p>Providing compassionate, personalized, and high-quality medical services using state-of-the-art technology to achieve the best health outcomes for every patient.</p>
+        </div>
     </div>
 </section>
-<section id="about" class="about section">
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="intro-section">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center" data-aos="fade-up" data-aos-delay="100">
-                    <h2>Excellence in Healthcare Since 1985</h2>
-                    <p class="lead">We believe that exceptional medical care begins with understanding. Our dedicated team of professionals combines cutting-edge technology with compassionate, personalized treatment to ensure every patient receives the highest standard of care.</p>
-                </div>
-            </div>
+<section class="main-content-area">
+    <div class="container">
+        <div class="doctor-image-container">
+            <img src="{{ asset('image/photo_2025-11-08_14-10-00.jpg') }}" alt="صورة">
         </div>
 
-        <div class="image-stats-section">
-            <div class="row align-items-center">
-                <div class="col-lg-7" data-aos="fade-right" data-aos-delay="200">
-                    <div class="image-gallery">
-                        <div class="main-image-container">
-                            <img src="image/photo_2025-11-08_14-10-00.jpg" class="img-fluid main-image" alt="Medical facility">
-                        </div>
-                        <div class="secondary-images">
-                            <img src="image/photo_2025-11-07_19-13-48.jpg" class="img-fluid secondary-image" alt="Medical team">
-                            <img src="image/photo_2025-11-07_19-13-48.jpg" class="img-fluid secondary-image" alt="Patient consultation">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-5" data-aos="fade-left" data-aos-delay="300">
-                    <div class="stats-content">
-                        <h3>Trusted Healthcare Provider</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-                        <div class="stats-list">
-                            <div class="stat-row">
-                                <div class="stat-number">
-                                    <span class="purecounter">22000</span>
-                                </div>
-                                <div class="stat-info">
-                                    <h5>Successful Treatments</h5>
-                                    <p>Completed with excellent patient outcomes</p>
-                                </div>
-                            </div>
-
-                            <div class="stat-row">
-                                <div class="stat-number">
-                                    <span class="purecounter">95</span>%
-                                </div>
-                                <div class="stat-info">
-                                    <h5>Patient Satisfaction</h5>
-                                    <p>Based on comprehensive feedback surveys</p>
-                                </div>
-                            </div>
-
-                            <div class="stat-row">
-                                <div class="stat-number">
-                                    <span class="purecounter">85</span>
-                                </div>
-                                <div class="stat-info">
-                                    <h5>Medical Professionals</h5>
-                                    <p>Specialists across various departments</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="features-wrapper">
+            <div class="header-content">
+                <h3>What Makes Us Different</h3>
+                <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of the moment.</p>
             </div>
-        </div>
 
-        <div class="mission-section" data-aos="fade-up" data-aos-delay="400">
-            <div class="row">
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="mission-item">
-                        <div class="mission-icon">
-                            <i class="bi bi-heart"></i>
-                        </div>
-                        <h4>Our Mission</h4>
-                        <p>To provide comprehensive, patient-centered healthcare that combines medical excellence with genuine compassion.</p>
+            <div class="features-list">
+                <div class="feature-row">
+                    <div class="feature-col left-feature">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <h3>
+                            FREE
+                            <br>
+                            CONSULTATION
+                        </h3>
+                    </div>
+                    <div class="feature-col right-feature">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <h3>
+                            AFFORDABLE
+                            <br>
+                            PRICES
+                        </h3>
                     </div>
                 </div>
-
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="mission-item">
-                        <div class="mission-icon">
-                            <i class="bi bi-eye"></i>
-                        </div>
-                        <h4>Our Vision</h4>
-                        <p>To be the leading healthcare provider in our region, recognized for innovative treatments and exceptional outcomes.</p>
+                <div class="feature-row">
+                    <div class="feature-col left-feature">
+                        <i class="fa-solid fa-user-group"></i>
+                        <h3>
+                            QUALIFIED
+                            <br>
+                            DOCTORS
+                        </h3>
+                    </div>
+                    <div class="feature-col right-feature">
+                        <i class="fa-solid fa-laptop-medical"></i>
+                        <h3>
+                            PROFESSIONAL
+                            <br>
+                            STAFF
+                        </h3>
                     </div>
                 </div>
-
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="mission-item">
-                        <div class="mission-icon">
-                            <i class="bi bi-star"></i>
-                        </div>
-                        <h4>Our Promise</h4>
-                        <p>Every patient will receive the highest quality care in a comfortable, supportive environment.</p>
+                <div class="feature-row last-row">
+                    <div class="feature-col left-feature">
+                        <i class="fa-solid fa-clock"></i>
+                        <h3>
+                            24/7
+                            <br>
+                            OPENED
+                        </h3>
+                    </div>
+                    <div class="feature-col right-feature">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <h3>
+                            ~50000
+                            <br>
+                            HAPPY CLIENTS
+                        </h3>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="specialties-section" data-aos="fade-up" data-aos-delay="500">
-            <div class="row text-center">
-                <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="specialty-item"><i class="bi bi-activity"></i><span>Cardiology</span></div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="150">
-                    <div class="specialty-item"><i class="bi bi-brain"></i><span>Neurology</span></div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="specialty-item"><i class="bi bi-person-hearts"></i><span>Pediatrics</span></div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="250">
-                    <div class="specialty-item"><i class="bi bi-scissors"></i><span>Surgery</span></div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="specialty-item"><i class="bi bi-file-medical"></i><span>Oncology</span></div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="350">
-                    <div class="specialty-item"><i class="bi bi-clipboard2-pulse"></i><span>Emergency</span></div>
-                </div>
+<section class="stats-section">
+    <div class="container">
+        <div class="stat-item">
+            <i class="fa-solid fa-hospital"></i>
+            <span class="stat-number">25+</span>
+            <p class="stat-label">Years of Experience</p>
+        </div>
+        <div class="stat-item">
+            <i class="fa-solid fa-user-tie"></i>
+            <span class="stat-number">150</span>
+            <p class="stat-label">Qualified Doctors</p>
+        </div>
+        <div class="stat-item">
+            <i class="fa-solid fa-bed"></i>
+            <span class="stat-number">400</span>
+            <p class="stat-label">Available Beds</p>
+        </div>
+        <div class="stat-item">
+            <i class="fa-solid fa-award"></i>
+            <span class="stat-number">98%</span>
+            <p class="stat-label">Patient Satisfaction</p>
+        </div>
+    </div>
+</section>
+
+<section class="testimonial-section">
+    <div class="background-overlay">
+        <div class="container text-center">
+            <h2 class="section-title">What patients say About Valeo</h2>
+            <div class="testimonial-slider-item">
+                <blockquote class="patient-quote">
+                    "The Cancer team at Valeo are nothing short of miracle workers - they were able to help me overcome my Leukemia in just 6 months"
+                </blockquote>
+                <p class="patient-info">
+                    CHRISTINE BLAINE, BLOOD PATIENT
+                </p>
+            </div>
+            <div class="slider-indicators">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
         </div>
     </div>

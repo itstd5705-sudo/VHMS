@@ -12,7 +12,6 @@ class Order extends Model
         'phoneNumber',
         'location',
         'total',
-        'status',
         'note'
     ];
     /**

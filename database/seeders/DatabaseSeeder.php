@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         ]);*/
 
         Admin::factory()->create();
-        $this->call(LoginSeeder::class);
+        $this->call(InitialDataSeeder::class);
     }
 }

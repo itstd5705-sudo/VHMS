@@ -8,13 +8,15 @@ class Booking extends Model
 {
     protected $fillable = [
         'userName',
-        'gender',
-        'yearOfBirth',
-        'phone',
         'status',
+        'phone',
         'note',
+        'phone',
+        'card_number',
+        'balance',
         'userId',
-        'appointmentId'
+        'appointmentId',
+        'queue_number'
     ];
 
     public function User()

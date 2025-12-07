@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('fullName');
             $table->string('password');
             $table->string('email')->unique();
-            $table->string('specialty');
+            $table->string('specialty')->nullable();
             $table->string('phone')->unique();
             $table->string('imgUrl')->nullable();
+            $table->enum('status', ['active','inactive'])->default('active');
             $table->integer('departmentId');
             $table->timestamps();
         });

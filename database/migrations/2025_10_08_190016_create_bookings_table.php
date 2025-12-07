@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->string('userName');
-            $table->enum('gender',['male','female']);
-            $table->year('yearOfBirth');
-            $table->enum('status', ['pending','approved','rejected','cancelled'])->default('pending');
+            $table->enum('status', ['approved','cancelled'])->default('approved');
             $table->text('note')->nullable();
-            $table->string('phone')->unique();
+            $table->string('phone');
+            $table->string('card_number')->nullable();
             $table->integer('userId');
             $table->integer('appointmentId');
+            $table->integer('queue_number')->nullable();
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class Doctor extends Authenticatable
         'specialty',
         'phone',
         'imgUrl',
+        'status',
         'departmentId'
     ];
 

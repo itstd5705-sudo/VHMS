@@ -1,88 +1,192 @@
-/* زر السلة العائم */
-.floating-cart {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: linear-gradient(135deg, #1abc9c, #16a085);
-    color: white;
-    padding: 14px 20px;
-    border-radius: 50px;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-    z-index: 9999;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-.floating-cart:hover {
-    background: linear-gradient(135deg, #16a085, #1abc9c);
-    transform: translateY(-3px) scale(1.05);
-}
-.cart-count {
-    background: white;
-    color: #16a085;
-    padding: 3px 8px;
-    border-radius: 50%;
-    font-size: 13px;
-    font-weight: bold;
-}
+/* =======================
+   Pharmacy Page Styles
+======================= */
 
-/* كروت الأدوية */
-.med-card {
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Hero Section */
+.about-hero-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
     text-align: center;
 }
-.med-card:hover {
+.about-hero-section .hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #099aa7;
+}
+.about-hero-section .hero-description {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Search Section */
+.bg-light form input,
+.bg-light form select,
+.bg-light form button {
+    height: 45px;
+}
+.bg-light form input,
+.bg-light form select {
+    padding: 0 15px;
+}
+
+/* Category Section */
+.category-section h3 {
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.category-section p {
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Pharmacy Cards */
+.pharmacy-card {
+    border-radius: 0 0 30px 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 200%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+.pharmacy-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
 }
-
-/* الصورة كاملة في وسط البطاقة */
-.med-img {
+.pharmacy-img {
     width: 100%;
-    height: 180px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto 10px;
-    border-radius: 10px 10px 0 0;
+    height: 120px;
+    object-fit: cover;
+}
+.pharmacy-card-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+.pharmacy-card-title {
+    font-size: 0.95rem;
+    margin: 5px 0;
 }
 
-/* أزرار الكمية */
-.quantity-box button {
-    width: 30px;
+/* Quantity Box */
+.pharmacy-quantity-box {
+
+    gap: 5px;
+
 }
-.quantity-box input {
-    width: 50px;
-    font-size: 0.9rem;
+.pharmacy-quantity-input {
+    width: 45px;
+    text-align: center;
 }
 
-/* زر إضافة للسلة */
-.btn-add-to-cart {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    color: white;
-    font-size: 0.85rem;
+/* Add To Cart Button */
+.btn-pharmacy-add-to-cart {
+    border-radius: 50px;
+    padding: 0px 0px;
+    font-size: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    transition: all 0.3s ease;
+    transition: background 0.3s;
 }
-.btn-add-to-cart:hover {
-    background: linear-gradient(135deg, #2980b9, #3498db);
-    transform: scale(1.05);
+.btn-pharmacy-add-to-cart:hover {
+    background-color: #007c8a;
 }
 
-/* صورة الدواء الطائر */
-.flying-med {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+
+
+/* Flying Image Animation */
+.pharmacy-flying-med {
+    position: fixed;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
+    border-radius: 8px;
     pointer-events: none;
-    z-index: 10000;
-    transition: transform 0.8s cubic-bezier(0.65, -0.6, 0.35, 1.6), opacity 0.8s;
+    z-index: 9999;
+    transition: transform 0.8s cubic-bezier(0.4,0,0.2,1), opacity 0.8s;
+}
+
+/* Floating Cart */
+.floating-cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #099aa7;
+    color: #fff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 1000;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+.floating-cart.shake {
+    animation: shake 0.5s;
+}
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ff3d00;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+.cart-count.bump {
+    animation: bump 0.5s;
+}
+
+/* Animations */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+@keyframes bump {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .pharmacy-img {
+        height: 140px;
+    }
+    .pharmacy-card-body {
+        padding: 10px 5px;
+    }
+}
+@media (max-width: 576px) {
+    .pharmacy-img {
+        height: 120px;
+    }
+    .btn-pharmacy-add-to-cart {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+    .pharmacy-quantity-input {
+        width: 40px;
+    }
 }

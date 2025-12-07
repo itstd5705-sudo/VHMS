@@ -14,7 +14,7 @@
 namespace App\Models{
 /**
  * @property int $id
- * @property string $userName
+ * @property string $name
  * @property string $email
  * @property string $password
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -28,11 +28,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereUserName($value)
  */
-	class Admin extends \Eloquent {}
+	class Admin extends \Eloquent implements \Filament\Models\Contracts\FilamentUser {}
 }
 
 namespace App\Models{
@@ -40,9 +40,11 @@ namespace App\Models{
  * @property int $id
  * @property int $doctorId
  * @property string $day
- * @property string $time
- * @property int $availableSchedule
+ * @property string $from_time
+ * @property string $to_time
  * @property string $status
+ * @property string $price
+ * @property int $max_bookings
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Booking> $Bookings
@@ -51,13 +53,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereAvailableSchedule($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDay($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereDoctorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereFromTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereMaxBookings($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereToTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment whereUpdatedAt($value)
  */
 	class Appointment extends \Eloquent {}
@@ -67,11 +71,10 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string $userName
- * @property string $gender
- * @property string $yearOfBirth
  * @property string $status
  * @property string|null $note
  * @property string $phone
+ * @property string|null $card_number
  * @property int $userId
  * @property int $appointmentId
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -82,8 +85,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereAppointmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereCardNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereNote($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking wherePhone($value)
@@ -91,7 +94,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereUserName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereYearOfBirth($value)
  */
 	class Booking extends \Eloquent {}
 }
@@ -124,6 +126,7 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string|null $imgUrl
+ * @property string|null $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Medication> $medications
@@ -132,6 +135,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereImgUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereName($value)
@@ -144,18 +148,20 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string $name
- * @property string|null $imagUrl
+ * @property string|null $imgUrl
  * @property string|null $location
  * @property string $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Doctor> $doctors
+ * @property-read int|null $doctors_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereImagUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereImgUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereLocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereUpdatedAt($value)
@@ -166,33 +172,13 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
- * @property string $name
- * @property string|null $description
- * @property string $price
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Device newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Device newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Device query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Device whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Device whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Device whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Device whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Device wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Device whereUpdatedAt($value)
- */
-	class Device extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property int $id
  * @property string $fullName
  * @property string $password
  * @property string $email
- * @property string $specialty
+ * @property string|null $specialty
  * @property string $phone
  * @property string|null $imgUrl
+ * @property string $status
  * @property int $departmentId
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -213,6 +199,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereSpecialty($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor whereUpdatedAt($value)
  */
 	class Doctor extends \Eloquent {}
@@ -249,27 +236,6 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string $name
- * @property string|null $description
- * @property string $price
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Lab newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Lab newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Lab query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Lab whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Lab whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Lab whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Lab whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Lab wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Lab whereUpdatedAt($value)
- */
-	class Lab extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property int $id
- * @property string $name
  * @property string $parcode
  * @property string|null $description
  * @property float $price
@@ -300,10 +266,8 @@ namespace App\Models{
 /**
  * @property int $id
  * @property int $userId
- * @property string $phoneNumber
  * @property string $location
  * @property float $total
- * @property string $status
  * @property string|null $note
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -319,8 +283,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereLocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereNote($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Order wherePhoneNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereUserId($value)
@@ -356,57 +318,12 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
- * @property int $orderId
- * @property string $paymentDate
- * @property string $paymentMethod
- * @property float $total
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Order|null $Order
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment whereOrderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment wherePaymentDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment wherePaymentMethod($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment whereTotal($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment whereUpdatedAt($value)
- */
-	class Payment extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property int $id
- * @property string $name
- * @property string|null $description
- * @property string $price
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Test newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Test newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Test query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Test whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Test whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Test whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Test whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Test wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Test whereUpdatedAt($value)
- */
-	class Test extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property int $id
  * @property string $userName
- * @property string|null $gender
- * @property int|null $yearOfBirth
- * @property string $phone
- * @property string|null $imgUrl
  * @property string $password
+ * @property string $gender
+ * @property int $yearOfBirth
+ * @property string $phone
+ * @property float $balance
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -416,10 +333,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereBalance($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereImgUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
@@ -428,5 +345,46 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereYearOfBirth($value)
  */
 	class User extends \Eloquent implements \Tymon\JWTAuth\Contracts\JWTSubject {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property string $card_number
+ * @property int $used
+ * @property int $card_category_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\cardCategory|null $category
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|card newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|card newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|card query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereCardCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereCardNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereUsed($value)
+ */
+	class card extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\card> $cards
+ * @property-read int|null $cards_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory whereUpdatedAt($value)
+ */
+	class cardCategory extends \Eloquent {}
 }
 

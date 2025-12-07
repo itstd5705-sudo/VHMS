@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->integer('doctorId');
-            $table->date('day');
-            $table->time('time');
-            $table->boolean('availableSchedule')->default(true);
-            $table->string('status');
+            $table->string('day');
+            $table->time('from_time');
+            $table->time('to_time');
+            $table->enum('status', ['available','booked','cancelled'])->default('available');
+            $table->decimal('price', 8, 2)->default(0); // سعر الموعد
+            $table->integer('max_bookings')->default(1);
             $table->timestamps();
         });
     }

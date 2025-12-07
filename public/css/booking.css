@@ -1,0 +1,149 @@
+/* العنوان الرئيسي */
+.booking-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+}
+
+/* الكارد الرئيسي */
+.booking-card {
+    max-width: 720px;
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.booking-card:hover {
+    transform: translateY(-3px);
+}
+
+/* صندوق تفاصيل الموعد */
+.appointment-box {
+    background: #f1f5f9;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+/* العناوين الصغيرة */
+.label-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 3px;
+}
+
+/* النصوص */
+.label-value {
+    font-size: 15px;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
+/* السعر */
+.price-text {
+    color: #059669;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* صندوق الطابور */
+.queue-box {
+    background: #e0f2fe;
+    padding: 15px 20px;
+    border-radius: 16px;
+    text-align: center;
+    margin-top: 10px;
+    flex: 1;
+    min-width: 180px;
+}
+
+.queue-box p {
+    margin: 0;
+}
+
+/* زر المحفظة */
+.wallet-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #e0f2fe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.wallet-btn:hover {
+    background-color: #bae6fd;
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* الأزرار */
+.btn-primary {
+    background-color: #3b82f6;
+    border: none;
+    border-radius: 14px;
+    padding: 12px 0;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+}
+
+.btn-success {
+    background-color: #10b981;
+    border-radius: 14px;
+    padding: 12px 0;
+    font-weight: 600;
+}
+
+.btn-success:hover {
+    background-color: #059669;
+}
+
+/* نموذج شحن المحفظة */
+.wallet-form {
+    background-color: #f1f5f9;
+    padding: 25px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+/* نصوص المدخلات */
+textarea.form-control,
+input.form-control {
+    border-radius: 12px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    transition: border-color 0.3s ease;
+}
+
+textarea.form-control:focus,
+input.form-control:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+/* رسائل التحذير والأخطاء */
+.alert-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+    border-radius: 12px;
+}
+
+.alert-danger {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border-radius: 12px;
+}

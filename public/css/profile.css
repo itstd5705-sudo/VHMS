@@ -1,0 +1,134 @@
+/* Sidebar */
+.sidebar {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    height: 100%;
+}
+.sidebar-top .avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 3px solid #90d9eb;
+    margin-bottom: 10px;
+}
+.sidebar .nav-link {
+    color: #555;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+.sidebar .nav-link.active, .sidebar .nav-link:hover {
+    background-color: #086378;
+    color: #fff;
+}
+
+/* Profile Card */
+.profile-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.profile-card .profile-info h5 {
+    display: inline-block;
+    font-weight: 600;
+    color: #5e0303;
+    width: 150px;
+}
+.profile-card .profile-info span {
+    font-weight: 500;
+    color: #000;
+}
+
+/* Form */
+.profile-form input.form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.profile-form .btn-turquoise {
+    background-color:#148994;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+.profile-form .btn-turquoise:hover {
+    background-color: #3a97ac;
+}
+
+/* Wallet Section */
+.wallet-section {
+     margin-top: 10px;
+}
+.wallet-summary {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+.wallet-summary:hover {
+    background-color: #086378;
+}
+.wallet-collapse {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+.wallet-collapse.active {
+    display: flex;
+}
+.wallet-collapse input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+.wallet-collapse button {
+    padding: 10px 40px;
+    border-radius: 20px;
+    border: 1px solid #148994;
+    background-color: #148994;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 198, 255, 0.3);
+    margin-top: 10px;
+}
+.wallet-collapse button:hover {
+    background-color: #086378;
+}
+/* Password Toggle Button */
+.password-toggle-btn {
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: 1px solid #148994;
+    background-color: #148994;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    margin-left: 5px;
+}
+.password-toggle-btn:hover {
+    background-color: #086378;
+}
+.input-group-password {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

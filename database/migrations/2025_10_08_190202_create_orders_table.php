@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('phoneNumber')->nullable()->change();
             $table->string('location');
             $table->double('total')->default(0);
-            $table->string('status')->default('pending');
             $table->text('note')->nullable();
             $table->timestamps();
         });

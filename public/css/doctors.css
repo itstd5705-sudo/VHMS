@@ -1,0 +1,97 @@
+/* doctors.css */
+/* صورة الطبيب في الكارت */
+.doctor-img {
+    height: 180px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 15px 15px 0 0;
+    transition: transform 0.3s ease;
+}
+
+/* تأثير تكبير خفيف عند المرور على الصورة */
+.doctor-card:hover .doctor-img {
+    transform: scale(1.05);
+}
+
+/* كارت الطبيب */
+.doctor-card {
+    border-radius: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* تأثير تكبير خفيف عند المرور على الكارت */
+.doctor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+/* أزرار البحث */
+form .form-control,
+form .form-select,
+form .btn {
+    height: 45px;
+}
+
+/* أزرار rounded-pill */
+.rounded-pill {
+    border-radius: 50px !important;
+}
+
+/* البادجات */
+.badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.6em;
+}
+
+/* ألوان البادجات */
+.text-bg-info {
+    background-color: #17a2b8 !important;
+    color: #fff !important;
+}
+
+.text-bg-light {
+    background-color: #f8f9fa !important;
+    color: #6c757d !important;
+    border: 1px solid #dee2e6;
+}
+
+/* أزرار عرض المواعيد وحجز الموعد */
+.view-profile-btn {
+    border: 1px solid #17a2b8;
+    color: #17a2b8;
+    transition: all 0.3s ease;
+}
+
+.view-profile-btn:hover {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+.book-appointment-btn {
+    background-color: #007bff;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.book-appointment-btn:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* شريط البحث */
+.bg-light.p-3.rounded-4.shadow-sm.border {
+    background-color: #f8f9fa !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.05);
+    border: 1px solid #dee2e6;
+}
+
+/* responsive adjustments */
+@media (max-width: 768px) {
+    .doctor-img {
+        height: 150px;
+    }
+    .form-control, .form-select, .btn {
+        height: 40px;
+    }
+}

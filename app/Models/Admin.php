@@ -6,17 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
 
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+
+    public function canAccessPanel(Panel $panel): bool{
+
+        return $this->email === 'admin1@gmail.com';
+    }
      protected $fillable =
     [
-        'userName',
+        'name',
         'email',
         'password',
     ];
