@@ -11,7 +11,7 @@ class doctorLogin extends Controller
     // صفحة تسجيل دخول الدكتور
     public function showLoginForm()
     {
-        return view('doctor.login');
+        return view('doctor.doctorLogin');
     }
     //عملية تسجيل دخول
     public function login(Request $request)

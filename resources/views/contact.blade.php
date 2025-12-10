@@ -2,9 +2,9 @@
 @section('content')
 <section class="contact-section py-5">
     <div class="container">
-        <h1 class="text-center mb-5">Contact Us</h1>
+        <h1 class="text-center mb-5">اتصل بنا</h1>
         <div class="row g-4">
-            <!-- Google Map -->
+            <!-- خريطة جوجل -->
             <div class="col-lg-6">
                 <div class="medinest-map-wrapper rounded-3 overflow-hidden shadow">
                     <iframe
@@ -14,22 +14,22 @@
                 </div>
             </div>
 
-            <!-- Contact Form -->
+            <!-- نموذج الاتصال -->
             <div class="col-lg-6">
                 <form>
                     <div class="mb-3">
-                        <label for="name" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="John Doe">
+                        <label for="name" class="form-label">الاسم الكامل</label>
+                        <input type="text" class="form-control" id="name" placeholder="أدخل اسمك">
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" placeholder="john@example.com">
+                        <label for="email" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
                     </div>
                     <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" rows="5"></textarea>
+                        <label for="message" class="form-label">الرسالة</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="اكتب رسالتك هنا"></textarea>
                     </div>
-                    <button class="btn btn-primary w-100">Send Message</button>
+                    <button class="btn btn-primary w-100">إرسال الرسالة</button>
                 </form>
             </div>
 

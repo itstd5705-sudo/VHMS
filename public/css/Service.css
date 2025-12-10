@@ -1,25 +1,33 @@
 /* ========================== */
 /*       Hero Section         */
 /* ========================== */
-.service-hero-section {
-    background: #063e9e;
-    padding: 70px 20px;
+.vh-hero-area {
+    padding: 80px 0;
+    background: #cacaca;
     text-align: center;
-    border-bottom: 1px solid #d6e6ff;
 }
 
-.service-hero-section .hero-title {
-    font-size: 2.2rem;
+.vh-container-boxx {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.vh-main-heading {
+    font-size: 32px;
     font-weight: 700;
-    color: #099aa7; /* تم تغييره */
+    color: #1e293b;
+    margin-bottom: 15px;
 }
 
-.service-hero-section .hero-description {
-   max-width: 650px;
-    margin: auto;
-    color: #4c5977;
-    font-size: 1.05rem;
+.vh-sub-text {
+    font-size: 18px;
+    color: #148994;
+    line-height: 1.7;
 }
+h2{
+     color: #148994;
+}
+
 /* ========================== */
 /*       Service Cards        */
 /* ========================== */

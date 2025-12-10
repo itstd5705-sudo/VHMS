@@ -1,10 +1,21 @@
 @extends('layouts.app')
 @section('content')
+<section class="vh-hero-area">
+    <div class="container">
+        <h2 class="vh-container-boxx">تحاليل وأجهزة طبية في مستشفى فينيسيا</h2>
+        <p class="vh-sub-text">
+      نقدم مجموعة شاملة من التحاليل المخبرية والفحوصات الطبية الحديثة، مع أحدث الأجهزة لضمان دقة النتائج وراحة المرضى.
+          </p>
+
+    </div>
+</section>
+
 <section id="lab-tests-catalog" class="lab-tests-section py-5">
         <div class="container">
-            <h2 class="text-center fw-bold mb-5 section-header"> التحاليل الطبية </h2>
-
             <div class="accordion accordion-flush" id="testsAccordion">
+                  <h2 class="text-center fw-bold mb-5 section-header" style="margin-top: 50px;">
+                <i class="bi bi-gear-wide-connected me-2"></i>  الأجهزة الطبية والتصوير
+            </h2>
 
                 <div class="accordion-item test-category-item rounded-3 shadow-sm mb-3">
                     <h3 class="accordion-header" id="headingBlood">
@@ -28,7 +39,6 @@
                                                     <p class="card-text small text-muted mb-3">تقييم شامل لخلايا الدم الحمراء والبيضاء والصفائح الدموية.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">150.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -47,7 +57,6 @@
                                                     <p class="card-text small text-muted mb-3">لتقييم متوسط مستويات السكر في الدم على مدى 3 أشهر.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">120.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +90,7 @@
                                                     <p class="card-text small text-muted mb-3">تقييم شامل لكفاءة الكبد وإنزيماته والصفراء.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">220.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -100,7 +109,7 @@
                                                     <p class="card-text small text-muted mb-3">تقييم شامل لوظيفة الكلى والترشيح.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">110.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,7 +128,7 @@
                                                     <p class="card-text small text-muted mb-3">مؤشر على التغذية ووظائف الكلى والكبد.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">160.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,7 +162,7 @@
                                                     <p class="card-text small text-muted mb-3">قياس مستوى فيتامين د الضروري للعظام والمناعة.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">300.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -172,7 +181,7 @@
                                                     <p class="card-text small text-muted mb-3">مؤشر على نقص الحديد وفقر الدم المحتمل.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">180.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,7 +200,7 @@
                                                     <p class="card-text small text-muted mb-3">ضروري لصحة الأعصاب وتكوين الدم.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">250.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -225,7 +234,7 @@
                                                     <p class="card-text small text-muted mb-3">لتقييم نشاط وقصور الغدة الدرقية.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">350.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -244,7 +253,7 @@
                                                     <p class="card-text small text-muted mb-3">تحديد مستويات الدهون لتقييم خطر أمراض القلب.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">140.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -277,7 +286,7 @@
                                                     <p class="card-text small text-muted mb-3">الكشف عن الأجسام المضادة للفيروسات الكبدية.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">450.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -296,7 +305,7 @@
                                                     <p class="card-text small text-muted mb-3">للكشف عن العدوى الفيروسية النشطة (مثل كورونا).</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">300.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -330,7 +339,7 @@
                                                     <p class="card-text small text-muted mb-3">تأكيد الحمل وتحديد مستواه (كمي).</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">100.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -349,7 +358,7 @@
                                                     <p class="card-text small text-muted mb-3">للكشف عن الطفيليات والعدوى المعوية.</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="price-tag fw-bold fs-6">80.00 ر.س</span>
-                                                        <button class="btn btn-sm btn-outline-primary rounded-pill">إضافة للسلة</button>
+
                                                     </div>
                                                 </div>
                                             </div>

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="profile-dashboard" dir="rtl">
+<section class="user-dashboard-wrapper">
     <div class="container-fluid">
         <div class="row">
 
             <!-- Sidebar -->
-            <aside class="col-lg-3 sidebar p-4">
-                <div class="sidebar-top text-center">
-                    <img src="{{ asset('image/تنزيل.png') }}" alt="User Avatar" class="avatar rounded-circle">
+            <aside class="col-lg-3 user-dashboard-sidebar">
+                <div class="sidebar-top">
+                    <img src="{{ asset('image/تنزيل.png') }}" alt="User Avatar" class="avatar-img">
                     <h5>{{ Auth::user()->userName }}</h5>
                 </div>
                 <ul class="nav flex-column mt-4">
@@ -24,7 +24,6 @@
             <main class="col-lg-9 main-content p-4">
                 <h2 class="mb-4">ملف الشخصي</h2>
 
-                <!-- Flash Messages -->
                 @if(session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
@@ -32,19 +31,17 @@
                     <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif
 
-                <!-- Profile Info Only -->
-                <div class="profile-card p-4 mb-4" id="profileInfo">
-                    <div class="profile-info"><h5>الاسم الكامل:</h5> <span>{{ Auth::user()->userName }}</span></div>
-                    <div class="profile-info"><h5>رقم الهاتف:</h5> <span>{{ Auth::user()->phone }}</span></div>
-                    <div class="profile-info"><h5>سنة الميلاد:</h5> <span>{{ Auth::user()->yearOfBirth }}</span></div>
+                <div class="user-profile-card p-4 mb-4" id="profileInfo">
+                    <div class="info-row"><h5>الاسم الكامل:</h5> <span>{{ Auth::user()->userName }}</span></div>
+                    <div class="info-row"><h5>رقم الهاتف:</h5> <span>{{ Auth::user()->phone }}</span></div>
+                    <div class="info-row"><h5>سنة الميلاد:</h5> <span>{{ Auth::user()->yearOfBirth }}</span></div>
 
-                    <!-- Wallet Section -->
-                    <div class="wallet-section mt-3">
-                        <div class="wallet-summary" onclick="toggleWallet()">
+                    <div class="user-wallet-section mt-3">
+                        <div class="user-wallet-summary" onclick="toggleWallet()">
                             <i class="bi bi-wallet2"></i>
                             <span>رصيدك الحالي: <strong>{{ Auth::user()->balance }} د.ل</strong></span>
                         </div>
-                        <div class="wallet-collapse mt-2">
+                        <div class="user-wallet-collapse mt-2">
                             <form action="{{ route('wallet.charge') }}" method="POST">
                                 @csrf
                                 <input type="text" name="card_number" placeholder="أدخل رقم الكرت" required>
@@ -54,16 +51,14 @@
                     </div>
                 </div>
 
-                <!-- Update Profile Form (hidden by default) -->
                 <div id="profileFormWrapper" style="display:none;">
-                    <!-- زر الرجوع داخل الفورم -->
                     <div class="mb-4 text-start">
                         <button type="button" class="btn btn-secondary" id="backToProfile">
                             <i class="bi bi-arrow-left-circle me-2"></i> رجوع
                         </button>
                     </div>
 
-                    <form action="{{ route('profile.update') }}" method="POST" class="profile-form">
+                    <form action="{{ route('profile.update') }}" method="POST" class="user-profile-form">
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -87,13 +82,13 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">كلمة المرور الجديدة (اختياري)</label>
-                                <div class="input-group-password">
+                                <div class="user-input-group-password">
                                     <input type="password" name="password" class="form-control" id="passwordInput" placeholder="اتركها فارغة إذا لم ترغب بالتغيير">
-                                    <button type="button" class="password-toggle-btn" id="togglePassword">إظهار</button>
+                                    <button type="button" class="user-password-toggle" id="togglePassword">إظهار</button>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-turquoise mt-3">تحديث الملف الشخصي</button>
+                        <button type="submit" class="btn btn-update mt-3">تحديث الملف الشخصي</button>
                     </form>
                 </div>
             </main>

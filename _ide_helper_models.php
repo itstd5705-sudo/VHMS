@@ -76,6 +76,7 @@ namespace App\Models{
  * @property string $phone
  * @property string|null $card_number
  * @property int $userId
+ * @property int $queue_number
  * @property int $appointmentId
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -90,6 +91,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereNote($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereQueueNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereUserId($value)

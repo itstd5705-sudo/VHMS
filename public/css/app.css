@@ -5,9 +5,9 @@
 /* ============================= */
 * {
     margin: 0;
-    padding: 0px;
     box-sizing: border-box;
     scroll-behavior: smooth;
+
 }
 
 html, body {
@@ -17,10 +17,8 @@ html, body {
     background: #f9fbfc;
     overflow-x: hidden;
 }
-
-
 body {
-    padding-top: 90px; /* مساحة للهيدر الثابت */
+    margin-top: 80px !important;
 }
 
 /* ============================= */

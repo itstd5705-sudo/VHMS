@@ -37,7 +37,6 @@
     <link rel="stylesheet" href="{{ asset('css/pharmacy.css') }}">
     <link rel="stylesheet" href="{{ asset('css/booking.css') }}">
 
-
 </head>
 <body>
 
@@ -101,7 +100,7 @@
 
     @auth('web')
         <li class="nav-item">
-            <a href="{{ route('profile.edit') }}" class="btn btn-outline-success btn-sm me-2">
+            <a href="{{ route('profile.edit') }}" class="btn btn-outline-success btn-sm me-3">
                 <i class="bi bi-person-circle"></i> لوحة التحكم
             </a>
         </li>

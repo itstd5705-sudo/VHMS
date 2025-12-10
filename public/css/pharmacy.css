@@ -3,21 +3,29 @@
 ======================= */
 
 /* Hero Section */
-.about-hero-section {
-    background-color: #f8f9fa;
-    padding: 60px 0;
+.vh-hero-area {
+    padding: 80px 0;
+    background: #cacaca;
     text-align: center;
 }
-.about-hero-section .hero-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #099aa7;
-}
-.about-hero-section .hero-description {
-    font-size: 1.1rem;
-    color: #555;
+
+.vh-container-boxx {
+    max-width: 900px;
+    margin: 0 auto;
 }
 
+.vh-main-heading {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.vh-sub-text {
+    font-size: 18px;
+    color: #475569;
+    line-height: 1.7;
+}
 /* Search Section */
 .bg-light form input,
 .bg-light form select,
@@ -189,4 +197,35 @@
     .pharmacy-quantity-input {
         width: 40px;
     }
+}
+.floating-cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0d6efd;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.floating-cart .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #dc3545;
+    color: white;
+    width: 22px;
+    height: 22px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

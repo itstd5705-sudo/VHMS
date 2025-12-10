@@ -71,7 +71,7 @@ class CardCategoryResource extends Resource
                             ]);
                         }
                     }),
-                    Tables\Actions\DeleteAction::make(),
+                  //  Tables\Actions\DeleteAction::make(),
             ])
             ->filters([
                 //

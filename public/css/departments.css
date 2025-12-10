@@ -9,14 +9,59 @@
 body {
     background-color: #f6f7fb;
 }
+/* Hero Section */
+.vh-hero-area {
+    padding: 80px 0;
+    background: #cacaca;
+    text-align: center;
+}
+
+.vh-container-boxx {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.vh-main-heading {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.vh-sub-text {
+    font-size: 18px;
+    color: #148994;
+    line-height: 1.7;
+}
+/* ------------------ شريط البحث الفريد ------------------ */
+.unique-search-bar {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.unique-search-bar form .unique-search-input {
+    border-radius: 30px;
+}
+
+.unique-search-bar form .unique-search-select {
+    border-radius: 30px;
+}
+
+.unique-search-bar form .unique-search-btn {
+    border-radius: 30px;
+}
 
 /* ------------------ قسم الأقسام الطبية ------------------ */
-.departments-section {
+.unique-med-dept-section {
     padding: 60px 0;
 }
 
-/* ------------------ تصميم الكروت المستطيلة ------------------ */
-.departments-section .card {
+/* ------------------ كروت الأقسام ------------------ */
+.unique-med-card {
     border-radius: 15px;
     transition: all 0.3s ease;
     overflow: hidden;
@@ -26,12 +71,12 @@ body {
     flex-direction: column;
 }
 
-.departments-section .card-img-wrapper {
+.unique-med-card-img-wrapper {
     height: 120px;
     overflow: hidden;
 }
 
-.departments-section .card img {
+.unique-med-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -40,12 +85,11 @@ body {
     border-top-right-radius: 15px;
 }
 
-.departments-section .card:hover img {
+.unique-med-card:hover img {
     transform: scale(1.05);
 }
 
-/* ------------------ بيانات القسم ------------------ */
-.department_body {
+.unique-med-dept-body {
     padding: 10px 12px;
     display: flex;
     flex-direction: column;
@@ -53,13 +97,13 @@ body {
     flex-grow: 1;
 }
 
-.department_body .card-title {
+.unique-med-card-title {
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 5px;
 }
 
-.department_body .dept-bio {
+.unique-med-dept-bio {
     font-size: 0.85rem;
     color: #555;
     margin-bottom: 8px;
@@ -70,8 +114,7 @@ body {
     -webkit-box-orient: vertical;
 }
 
-/* خط فاصل بين الوصف وعدد الأطباء */
-.department-footer {
+.unique-med-dept-footer {
     border-top: 1px solid #ddd;
     padding-top: 6px;
     display: flex;
@@ -80,7 +123,7 @@ body {
     font-size: 0.9rem;
 }
 
-.department-badge {
+.unique-med-dept-badge {
     border-radius: 50px;
     color: #fff;
     padding: 5px 12px;
@@ -88,42 +131,10 @@ body {
 }
 
 /* ترتيب الكروت */
-@media (min-width: 1400px) { .departments-section .col-lg-3 { flex: 0 0 20%; max-width: 20%; } }
-@media (min-width: 1200px) and (max-width: 1399px) { .departments-section .col-lg-3 { flex: 0 0 25%; max-width: 25%; } }
-@media (min-width: 992px) and (max-width: 1199px) { .departments-section .col-md-6 { flex: 0 0 50%; max-width: 50%; } }
-@media (max-width: 991px) { .departments-section .col-sm-12 { flex: 0 0 100%; max-width: 100%; } }
+@media (min-width: 1400px) { .unique-med-dept-section .col-lg-3 { flex: 0 0 20%; max-width: 20%; } }
+@media (min-width: 1200px) and (max-width: 1399px) { .unique-med-dept-section .col-lg-3 { flex: 0 0 25%; max-width: 25%; } }
+@media (min-width: 992px) and (max-width: 1199px) { .unique-med-dept-section .col-md-6 { flex: 0 0 50%; max-width: 50%; } }
+@media (max-width: 991px) { .unique-med-dept-section .col-sm-12 { flex: 0 0 100%; max-width: 100%; } }
 
-/* شريط البحث */
-.row.justify-content-center { margin-bottom: 40px; }
-
-/* خط Google Fonts */
+/* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
-
-.hero-title {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #000;
-    margin: 0;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-    position: relative;
-}
-
-.hero-title::after {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 4px;
-    background-color: #f5f5f5;
-    margin: 5px auto 0;
-    border-radius: 2px;
-}
-
-.hero-description {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #000;
-    max-width: 600px;
-    margin: 5px auto 0;
-    line-height: 1.5;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-}

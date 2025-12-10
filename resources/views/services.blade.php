@@ -1,16 +1,15 @@
 @extends('layouts.app')
 @section('content')
-
 {{-- Hero Section --}}
-<section class="about-hero-section">
-    <div class="container text-center">
-        <h2 class="hero-title">خدمات مستشفى فينيسيا</h2>
-        <p class="hero-description mb-4">
-            منذ 1985، نقدم رعاية طبية متكاملة باستخدام أحدث الأجهزة والتقنيات، مع التركيز على راحة ورضا المريض.
-        </p>
+<section class="vh-hero-area">
+    <div class="vh-container-boxx">
+    <h2 class="vh-main-heading">خدماتنا الطبية الشاملة في مستشفى فينيسيا</h2>
+    <p class="vh-sub-text">
+    اكتشف مجموعة واسعة من الخدمات الطبية الحديثة، من الأشعة والتحاليل المخبرية إلى الرعاية النفسية والحرجة، مع أحدث الأجهزة وأفضل الكوادر.
+    </p>
+
     </div>
 </section>
-
 {{-- Services Grid --}}
 <section id="services" class="py-5">
     <div class="container">

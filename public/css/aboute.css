@@ -1,0 +1,187 @@
+/* -------------------------------------- */
+/* 12  سكشن (about Section) */
+/* -------------------------------------- */
+.medinest-excellence-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+.medinest-excellence-title {
+    font-size :36px;
+    font-weight: 700;
+    line-height: 1.2;
+    color:#148994;
+    margin-top: 20px;
+
+}
+.medinest-excellence-description {
+    font-size: 17px;
+    color: #1f2224;
+    line-height: 1.7;
+    max-width: 700px;
+    margin-top: 15px;
+}
+.gallery-title {
+      font-size :36px;
+    font-weight: 700;
+    line-height: 1.2;
+    color:#148994;
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 50px;
+
+    padding-bottom: 5px;
+}.carousel-container {
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    padding: 0 100px;
+    height: 70vh;
+
+}
+.carousel-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 400px;
+}
+.carousel-slide {
+    position: absolute;
+    width: 500px;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+.carousel-slide.active {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    z-index: 10;
+    pointer-events: auto;
+}
+.carousel-slide.prev {
+    opacity: 0.5;
+    transform: translateX(120%) scale(0.85);
+    z-index: 5;
+}
+
+.carousel-slide.next {
+    opacity: 0.5;
+    transform: translateX(-120%) scale(0.85);
+    z-index: 5;
+}
+.carousel-slide:not(.active):not(.prev):not(.next) {
+    opacity: 0;
+    transform: scale(0.7);
+}
+.massag-section {
+    padding: 60px 0;
+    text-align: right;
+    direction: rtl;
+    background-color: #f4f8fb; /* خلفية خفيفة للسِكشن */
+
+}
+
+.mass-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #148994; /* اللون الأساسي (الأزرق/الأخضر الداكن) */
+    font-size: 32px;
+}
+
+/* ----------------------------------------------------
+   2. CARDS LAYOUT (massag-row & massag-card)
+---------------------------------------------------- */
+.massag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.massag-card {
+    /* كل بطاقة تأخذ ثلث المساحة تقريباً */
+    flex: 1 1 calc(33.333% - 30px);
+    min-width: 280px;
+    background-color: white;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    /* 🛠️ تم تعديل المحاذاة العامة هنا لدعم المحاذاة الداخلية لليمين */
+    text-align: right;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.massag-card:hover {
+    transform: translateY(-5px); /* تأثير رفع البطاقة عند التمرير */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+.header-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+.icon-container {
+    color: #148994;
+    font-size: 30px;
+    margin-right: 15px;
+    margin-left: 0;
+    min-width: 30px;
+}
+.massag-card h3 {
+    font-size: 30px;
+    margin: 0;
+    color: #148994;
+    flex-grow: 1;
+    text-align: right;
+    margin-right: 2rem;
+    font-weight: bold;
+}
+.massag-card p {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+.massag-card.hidden {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.massag-card[data-animation="slide-up"] {
+    transform: translateY(30px);
+}
+.massag-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ----------------------------------------------------
+   5. RESPONSIVENESS (Media Query)
+---------------------------------------------------- */
+@media (max-width: 900px) {
+    .massag-row {
+        flex-direction: column; /* جعل البطاقات تحت بعضها البعض على الموبايل */
+    }
+    .massag-card {
+        flex: 1 1 100%;
+    }
+}

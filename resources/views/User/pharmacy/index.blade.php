@@ -9,19 +9,22 @@ $cartCount = session('cart') ? array_sum(array_column(session('cart'), 'quantity
 @endsection
 
 @section('content')
-<section class="about-hero-section">
-    <div class="container text-center">
-        <h2 class="hero-title">Pharmacy</h2>
-        <p class="hero-description">
-            Venice Hospital has been a pioneer in healthcare since 1985. Our facility in Benghazi offers state-of-the-art medical services in a patient-friendly environment.
-        </p>
+<section class="vh-hero-area">
+    <div class="container">
+        <h2 class="vh-container-boxx">صيدلية مستشفى فينيسيا</h2>
+    <p class="vh-sub-text">
+    ابحث عن أدوية وصفاتك الطبية بسهولة واطلبها مباشرة من الصيدلية.
+</p>
+
     </div>
 </section>
+
+
    <!-- 🔍 شريط البحث -->
     <div class="bg-light p-3 rounded-4 shadow-sm mb-5 border">
         <form action="{{ route('pharmacy.search') }}" method="GET" class="row g-2 align-items-center">
             <div class="col-md-5">
-                <input type="text" name="name" class="form-control rounded-pill" placeholder="ابحث عن دواء" value="{{ request('name') }}">
+               <input type="text" name="name" class="form-control rounded-pill" placeholder="ابحث عن دواء أو فئة" value="{{ request('name') }}">
             </div>
 
             <div class="col-md-4">

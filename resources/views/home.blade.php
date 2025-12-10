@@ -14,7 +14,7 @@
         <div class="container">
             <div class="action-box working-hours">
                 <div class="box-header">
-                    <h2>ساعات العمل</h2>
+                    <h4>ساعات العمل</h4>
                 </div>
                 <div class="box-details hidden">
                     <p>العيادات التخصصيه من السبت للخميس </p>
@@ -24,7 +24,7 @@
 
             <div class="action-box contact-details">
                 <div class="box-header">
-                    <h2>تفاصيل العنوان</h2>
+                    <h4>تفاصيل العنوان</h4>
                 </div>
                 <div class="box-details hidden">
                     <p> الطريق الدائري الرابع-شارع فينيسيا</p>
@@ -34,7 +34,7 @@
 
             <div class="action-box appointment">
                 <div class="box-header">
-                    <h2>الحجز</h2>
+                    <h4>الحجز</h4>
                 </div>
                 <div class="box-details hidden">
                     <p>لاستخدام طريقة الحجز عبر الانترنت </p>
