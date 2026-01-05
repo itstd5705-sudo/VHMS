@@ -47,9 +47,9 @@ namespace App\Models{
  * @property int $max_bookings
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Booking> $Bookings
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Booking> $bookings
  * @property-read int|null $bookings_count
- * @property-read \App\Models\Doctor|null $Doctor
+ * @property-read \App\Models\Doctor|null $doctor
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Appointment query()
@@ -76,16 +76,18 @@ namespace App\Models{
  * @property string $phone
  * @property string|null $card_number
  * @property int $userId
- * @property int $queue_number
  * @property int $appointmentId
+ * @property int|null $queue_number
+ * @property int $archived
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Appointment|null $Appointment
- * @property-read \App\Models\User|null $User
+ * @property-read \App\Models\Appointment|null $appointment
+ * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereAppointmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereArchived($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereCardNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Booking whereId($value)
@@ -103,13 +105,55 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property string $card_number
+ * @property int $used
+ * @property int $card_category_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\CardCategory $category
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Card newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Card newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Card query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Card whereCardCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Card whereCardNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Card whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Card whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Card whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Card whereUsed($value)
+ */
+	class Card extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Card> $cards
+ * @property-read int|null $cards_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CardCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CardCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CardCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CardCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CardCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CardCategory wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CardCategory whereUpdatedAt($value)
+ */
+	class CardCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property int $userId
  * @property int $medId
  * @property int $quantity
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User|null $User
  * @property-read mixed $total
+ * @property-read \App\Models\Medication|null $medication
+ * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart query()
@@ -151,7 +195,6 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string|null $imgUrl
- * @property string|null $location
  * @property string $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -164,7 +207,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereImgUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereLocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereUpdatedAt($value)
  */
@@ -184,9 +226,11 @@ namespace App\Models{
  * @property int $departmentId
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Department|null $Department
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Appointment> $appointments
  * @property-read int|null $appointments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Booking> $bookings
+ * @property-read int|null $bookings_count
+ * @property-read \App\Models\Department|null $department
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Doctor newModelQuery()
@@ -268,16 +312,17 @@ namespace App\Models{
 /**
  * @property int $id
  * @property int $userId
+ * @property string|null $phoneNumber
  * @property string $location
  * @property float $total
  * @property string|null $note
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User|null $User
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderItem> $items
  * @property-read int|null $items_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderItem> $orderItem
- * @property-read int|null $order_item_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderItem> $orderItems
+ * @property-read int|null $order_items_count
+ * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order query()
@@ -285,6 +330,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereLocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Order wherePhoneNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order whereUserId($value)
@@ -326,20 +372,30 @@ namespace App\Models{
  * @property int $yearOfBirth
  * @property string $phone
  * @property float $balance
+ * @property string $patient_code
+ * @property string|null $chronic_diseases
+ * @property string|null $current_medications
+ * @property string|null $blood_type
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read int|null $orders_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereBalance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereBloodType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereChronicDiseases($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCurrentMedications($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePatientCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
@@ -347,46 +403,5 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereYearOfBirth($value)
  */
 	class User extends \Eloquent implements \Tymon\JWTAuth\Contracts\JWTSubject {}
-}
-
-namespace App\Models{
-/**
- * @property int $id
- * @property string $card_number
- * @property int $used
- * @property int $card_category_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\cardCategory|null $category
- * @method static \Illuminate\Database\Eloquent\Builder<static>|card newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|card newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|card query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereCardCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereCardNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|card whereUsed($value)
- */
-	class card extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property int $id
- * @property int $price
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\card> $cards
- * @property-read int|null $cards_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|cardCategory whereUpdatedAt($value)
- */
-	class cardCategory extends \Eloquent {}
 }
 

@@ -6,43 +6,50 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $fillable=
-    [
-        'userId',
-        'medId',
-        'quantity'
+    // الحقول التي يمكن تعبئتها جماعياً
+    protected $fillable = [
+        'userId',   // معرف المستخدم
+        'medId',    // معرف الدواء
+        'quantity'  // الكمية المطلوبة
     ];
 
-     public function User()
+    /**
+     * علاقة السلة بالمستخدم
+     */
+    public function user()
     {
-        return $this->belongsTo(User::class,'userId','id');
-    }
-
-     public function Medication()
-    {
-        return $this->beشlongsTo(Medication::class,'medId','id');
+        return $this->belongsTo(User::class, 'userId', 'id');
     }
 
     /**
-     * يحسب مجموع كية وفي سعرهن.
-     * كمية يلي ف سلة ضرب سعر دواء نجيبو من علاقة بتاع الدواء
+     * علاقة السلة بالدواء
      */
-    protected $appends=['total'];
+    public function medication()
+    {
+        return $this->belongsTo(Medication::class, 'medId', 'id');
+    }
+
+    /**
+     * يحسب مجموع السعر للدواء في السلة
+     * مجموع = الكمية * سعر الدواء
+     */
+    protected $appends = ['total'];
 
     public function getTotalAttribute()
     {
-        return $this->quantity * $this->Medication->pric;
+        // تصحيح اسم العلاقة واسم الحقل 'price'
+        return $this->quantity * ($this->medication->price ?? 0);
     }
 
     /**
-     * ينقص كمية من مخزن .
-     * كمية دواء يلي ف مخزن نقص كمية يلي ف سلة
+     * ينقص كمية الدواء في المخزن بناءً على كمية السلة
      */
-    public function decrase()
+    public function decreaseStock()
     {
-        $this->Medication()->update([
-            'stockQuantity'=> $this->Medication->stockQuantity - $this->quantity
-
-        ]);
+        if ($this->medication) {
+            $this->medication->update([
+                'stockQuantity' => $this->medication->stockQuantity - $this->quantity
+            ]);
+        }
     }
 }

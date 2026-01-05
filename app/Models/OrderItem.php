@@ -6,21 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
 {
-     protected $fillable=
-    [
-        'orderId',
-        'medId',
-        'qty',
-        'price'
+    // الحقول التي يمكن تعبئتها جماعياً (Mass Assignment)
+    protected $fillable = [
+        'orderId',  // معرف الطلب
+        'medId',    // معرف الدواء
+        'qty',      // الكمية
+        'price',    // سعر العنصر
     ];
 
-     public function Order()
+    /**
+     * العلاقة مع نموذج الطلب (Order)
+     * كل OrderItem ينتمي لطلب واحد
+     */
+    public function Order()
     {
-        return $this->belongsTo(Order::class, 'orderId','id');
+        return $this->belongsTo(Order::class, 'orderId', 'id');
     }
 
-     public function Medication()
+    /**
+     * العلاقة مع نموذج الدواء (Medication)
+     * كل OrderItem مرتبط بدواء واحد
+     */
+    public function Medication()
     {
-        return $this->belongsTo(Medication::class,'medId','id');
+        return $this->belongsTo(Medication::class, 'medId', 'id');
     }
 }

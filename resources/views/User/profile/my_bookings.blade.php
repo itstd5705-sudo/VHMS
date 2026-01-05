@@ -52,22 +52,8 @@
                         @endif
 
                         {{-- معلومات الطابور --}}
-                        <p>رقم الدور المتوقع: <strong>{{ $booking->expectedQueue }}</strong></p>
+                        <p>رقم الدور: <strong>{{ $booking->expectedQueue }}</strong></p>
                         <p>عدد الأشخاص قبلك: <strong>{{ $booking->peopleBefore }}</strong></p>
-
-
-                        {{-- زر الإلغاء إذا لم تمضِ 3 ساعات --}}
-                        @if($hoursPassed < 3)
-                            <form action="{{ route('booking.cancel', $booking->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger w-100 mt-2">
-                                    <i class="bi bi-x-circle me-2"></i> إلغاء الحجز
-                                </button>
-                            </form>
-                        @else
-                            <span class="text-muted">انتهت صلاحية الإلغاء</span>
-                        @endif
                     </div>
                 </div>
             @endforeach

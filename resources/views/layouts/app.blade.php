@@ -22,6 +22,7 @@
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     {{-- Your CSS --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -70,11 +71,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('departments.index') ? 'active' : '' }}" href="{{ route('departments.index') }}">الأقسام</a>
+                    <a class="nav-link {{ request()->routeIs('analyses') ? 'active' : '' }}" href="{{ route('analyses') }}">المختبر</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('analyses') ? 'active' : '' }}" href="{{ route('analyses') }}">المختبر</a>
+                    <a class="nav-link {{ request()->routeIs('departments.index') ? 'active' : '' }}" href="{{ route('departments.index') }}">الأقسام</a>
                 </li>
 
                 <li class="nav-item">
@@ -86,34 +87,47 @@
                 </li>
 
             </ul>
+{{-- Right menu --}}
+        <ul class="navbar-nav ms-auto align-items-center position-relative">
 
-            {{-- Right menu --}}
-           <ul class="navbar-nav ms-auto align-items-center position-relative">
-
+    {{-- إذا لم يسجل أي شخص دخول --}}
     @guest('web')
-        <li class="nav-item">
-            <a href="{{ route('user.login.form') }}" class="btn btn-outline-primary btn-lg me-2 login-btn-big">
-                <i class="bi bi-box-arrow-in-right"></i> تسجيل دخول
-            </a>
-        </li>
+    <li class="nav-item dropdown">
+        <a class="btn btn-outline-primary btn-sm dropdown-toggle login-btn-sm" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-box-arrow-in-right"></i> تسجيل دخول
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <a class="dropdown-item" href="{{ route('user.login') }}">
+                    <i class="bi bi-person me-2"></i> مستخدم
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{ route('doctor.login') }}">
+                    <i class="bi bi-person-badge me-2"></i> دكتور
+                </a>
+            </li>
+        </ul>
+    </li>
     @endguest
 
+    {{-- إذا سجل المستخدم العادي دخول --}}
     @auth('web')
-        <li class="nav-item">
-            <a href="{{ route('profile.edit') }}" class="btn btn-outline-success btn-sm me-3">
-                <i class="bi bi-person-circle"></i> لوحة التحكم
-            </a>
-        </li>
+    <li class="nav-item">
+        <a href="{{ route('profile.edit') }}" class="btn btn-outline-success btn-sm me-3">
+            <i class="bi bi-person-circle"></i> لوحة التحكم
+        </a>
+    </li>
 
-        <!-- أيقونة تسجيل خروج فقط + فوق -->
-        <li class="nav-item logout-icon-item">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="logout-icon-btn" title="تسجيل خروج">
-                    <i class="bi bi-box-arrow-left"></i>
-                </button>
-            </form>
-        </li>
+    {{-- أيقونة تسجيل الخروج --}}
+    <li class="nav-item logout-icon-item">
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="logout-icon-btn" title="تسجيل خروج">
+                <i class="bi bi-box-arrow-left"></i>
+            </button>
+        </form>
+    </li>
     @endauth
 
 </ul>

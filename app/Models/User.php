@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,26 +9,34 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    // استخدام الـ Factory والـ Notifications
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * الحقول التي يمكن إدخالها جماعياً (Mass Assignment)
      *
      * @var list<string>
      */
-     protected $fillable =
-    [
-        'userName',
-        'password',
-        'gender',
-        'yearOfBirth',
-        'phone',
-        'balance'
+    protected $fillable = [
+        'userName',           // اسم المستخدم
+        'password',           // كلمة المرور
+        'gender',             // الجنس
+        'yearOfBirth',        // سنة الميلاد
+        'phone',              // رقم الهاتف
+        'balance',            // رصيد المستخدم
+        'patient_code',       // كود المريض (يتولد تلقائياً)
+        'chronic_diseases',   // الأمراض المزمنة (نص)
+        'current_medications',// الأدوية الحالية (نص)
+        'blood_type'          // فصيلة الدم
     ];
+// app/Models/User.php
+public function orders()
+{
+    return $this->hasMany(\App\Models\Order::class);
+}
 
     /**
-     * The attributes that should be hidden for serialization.
+     * الحقول المخفية عند تحويل النموذج إلى JSON
      *
      * @var list<string>
      */
@@ -39,20 +46,20 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * تحويل بعض الحقول تلقائياً
      *
      * @return array<string, string>
      */
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'email_verified_at' => 'datetime', // تحويل حقل التحقق من الايميل لتاريخ
+            'password' => 'hashed',            // تشفير كلمة المرور تلقائياً
         ];
     }
 
     /**
-     * Get the identifier that will be stored in the JWT token.
+     * جلب معرف المستخدم ليتم تخزينه في الـ JWT token
      */
     public function getJWTIdentifier()
     {
@@ -60,10 +67,36 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Return an array with custom claims to be added to the JWT token.
+     * أي بيانات إضافية نريد إضافتها في الـ JWT token
      */
     public function getJWTCustomClaims()
     {
         return [];
     }
+
+    /**
+ * توليد كود المريض تلقائياً عند إنشاء سجل جديد
+ */
+protected static function booted()
+{
+    static::creating(function ($patient) {
+        $year = date('Y'); // السنة الحالية
+
+        // آخر رقم مستخدم لهذه السنة
+        $lastPatient = User::whereYear('created_at', $year)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        if ($lastPatient) {
+            // استخراج الجزء الرقمي من الكود السابق بعد السنة
+            $lastNumber = (int)substr($lastPatient->patient_code, 4);
+        } else {
+            $lastNumber = 0;
+        }
+
+        // توليد كود المريض الجديد
+        $patient->patient_code = $year . str_pad($lastNumber + 1, 6, '0', STR_PAD_LEFT);
+    });
+}
+
 }

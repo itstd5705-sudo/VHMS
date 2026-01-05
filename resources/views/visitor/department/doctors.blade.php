@@ -17,21 +17,21 @@
     </h2>
        <!-- 🔍 شريط البحث -->
     <div class="bg-light p-3 rounded-4 shadow-sm mb-5 border">
-        <form action="{{ route('doctors.search') }}" method="GET" class="row g-2 align-items-center">
+        <form method="GET" action="{{ route('doctors.search') }}"  class="row g-2 align-items-center">
             <div class="col-md-5">
                 <input type="text" name="name" class="form-control rounded-pill" placeholder="ابحث عن طبيب" value="{{ request('name') }}">
             </div>
+<div class="col-md-4 position-relative">
+    <select name="department" class="form-select rounded-pill department-select">
+        <option value="">كل الأقسام</option>
+        @foreach($departments as $dep)
+            <option value="{{ $dep->id }}" @selected(request('department') == $dep->id)>
+                {{ $dep->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
-            <div class="col-md-4">
-                <select name="department" class="form-select rounded-pill">
-                    <option value="">كل الأقسام</option>
-                    @foreach($departments as $dep)
-                        <option value="{{ $dep->id }}" @selected(request('department') == $dep->id)>
-                            {{ $dep->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
             <div class="col-md-3">
                 <button class="btn btn-info w-100 rounded-pill text-white">بحث</button>
             </div>
@@ -43,7 +43,8 @@
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
 
-        @forelse(($doctors ?? $department->doctors) as $doctor)
+      @forelse($doctors as $doctor)
+
         <div class="col">
             <div class="card h-100 shadow-lg border-0 doctor-card overflow-hidden position-relative">
 
@@ -91,4 +92,7 @@
 
     </div>
 </div>
+ <div class="mt-5 d-flex justify-content-center">
+        {{ $doctors->links() }}
+    </div>
 @endsection

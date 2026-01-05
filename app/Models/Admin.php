@@ -9,29 +9,22 @@ use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 
-
-
 class Admin extends Authenticatable implements FilamentUser
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    // استخدام الـ HasFactory و Notifiable
     use HasFactory, Notifiable;
 
-
-    public function canAccessPanel(Panel $panel): bool{
-
-        return $this->email === 'admin1@gmail.com';
-    }
-     protected $fillable =
-    [
-        'name',
-        'email',
-        'password',
+    /**
+     * الحقول التي يمكن تعبئتها جماعياً
+     */
+    protected $fillable = [
+        'name',       // الاسم
+        'email',      // البريد الإلكتروني
+        'password',   // كلمة المرور
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
+     * الحقول المخفية عند التحويل إلى JSON أو Serialization
      */
     protected $hidden = [
         'password',
@@ -39,17 +32,34 @@ class Admin extends Authenticatable implements FilamentUser
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * تحويل بعض الحقول تلقائياً
      */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password' => 'hashed', // يحفظ كلمة المرور مشفرة تلقائياً
         ];
     }
 
+    /**
+     * السماح بالوصول إلى لوحة Filament
+     * @param Panel $panel
+     * @return bool
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+       // أي أدمن مسجل يُسمح له بالوصول
+        return true;
+    }
 
+
+    /**
+     * دالة تتحقق إذا المستخدم أدمن (يمكن استخدامها داخل النظام)
+     */
+    public function isAdmin(): bool
+    {
+        // هنا يمكن إضافة شروط إضافية حسب الدور أو البريد
+        return true; // كل مستخدم في جدول Admin يُعتبر أدمن
+    }
 }

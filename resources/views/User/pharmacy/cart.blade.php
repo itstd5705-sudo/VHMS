@@ -1,22 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 <div class="container py-5">
     <h2 class="mb-4 text-center fw-bold">سلة مشترياتك</h2>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-    @if(session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif
+@if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
+@if(session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
 
     @if($cart && count($cart) > 0)
         <div class="list-group">
             @php $total = 0; @endphp
             @foreach($cart as $id => $item)
                 @php $total += $item['price'] * $item['quantity']; @endphp
-                <div class="cart-row d-flex align-items-center justify-content-between mb-3 p-3 shadow-sm rounded">
+                <div class="cart-row d-flex align-items-center justify-content-between mb-3 p-3 shadow-sm rounded" data-stock="{{ $item['stockQuantity'] }}">
                     <div class="flex-grow-1 d-flex justify-content-between align-items-center">
                         <div>
                             <h5 class="fw-bold mb-1">{{ $item['name'] }}</h5>
@@ -24,13 +26,14 @@
                         </div>
                         <div class="d-flex align-items-center gap-2">
                             <form action="{{ route('pharmacy.updateCart', $id) }}" method="POST" class="d-flex align-items-center gap-1 mb-0">
-                                @csrf
-                                @method('PUT')
-                                <button type="button" class="btn btn-sm btn-outline-secondary btn-decrease">-</button>
-                                <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" class="form-control form-control-sm quantity-input text-center" style="width:50px;">
-                                <button type="button" class="btn btn-sm btn-outline-secondary btn-increase">+</button>
-                                <button type="submit" class="btn btn-sm btn-outline-success rounded-pill">تحديث</button>
-                            </form>
+    @csrf
+    @method('PUT')
+    <button type="button" class="btn btn-sm btn-outline-secondary btn-decrease">-</button>
+    <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" max="{{ $item['stockQuantity'] }}" class="form-control form-control-sm quantity-input text-center" style="width:50px;">
+    <button type="button" class="btn btn-sm btn-outline-secondary btn-increase">+</button>
+    <button type="submit" class="btn btn-sm btn-outline-success rounded-pill">تحديث</button>
+</form>
+
                             <form action="{{ route('pharmacy.removeFromCart', $id) }}" method="POST" class="mb-0">
                                 @csrf
                                 @method('DELETE')
@@ -84,15 +87,20 @@
         <p class="text-center fs-5 text-secondary mt-5">سلة المشتريات فارغة</p>
     @endif
 </div>
-
 <script>
 document.querySelectorAll('.cart-row').forEach(card => {
     const increaseBtn = card.querySelector('.btn-increase');
     const decreaseBtn = card.querySelector('.btn-decrease');
     const input = card.querySelector('.quantity-input');
+    const maxQty = parseInt(card.dataset.stock) || 999;
 
-    increaseBtn.addEventListener('click', () => input.value = parseInt(input.value)+1 );
-    decreaseBtn.addEventListener('click', () => { if(parseInt(input.value)>1) input.value=parseInt(input.value)-1; });
+    increaseBtn.addEventListener('click', () => {
+        if(parseInt(input.value) < maxQty) input.value = parseInt(input.value) + 1;
+    });
+    decreaseBtn.addEventListener('click', () => {
+        if(parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;
+    });
 });
 </script>
+
 @endsection

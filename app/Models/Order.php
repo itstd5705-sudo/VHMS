@@ -6,28 +6,37 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-     protected $fillable=
-    [
-        'userId',
-        'phoneNumber',
-        'location',
-        'total',
-        'note'
+    // الحقول التي يمكن تعبئتها جماعياً
+    protected $fillable = [
+        'userId',       // معرف المستخدم صاحب الطلب
+        'phoneNumber',  // رقم الهاتف
+        'location',     // موقع التسليم
+        'total',        // إجمالي قيمة الطلب
+        'note'          // ملاحظات إضافية
     ];
+
     /**
-     * هذي مع m:m /1:m
-    */
-    public function User()
+     * علاقة الطلب بالمستخدم (User)
+     * كل طلب ينتمي لمستخدم واحد
+     */
+    public function user()
     {
-        return $this->belongsTo(User::class,'userId','id');
+        return $this->belongsTo(User::class, 'userId', 'id');
     }
 
-    public function orderItem()
+    /**
+     * علاقة الطلب بعناصره (OrderItem)
+     * كل طلب يحتوي على عدة عناصر
+     */
+    public function orderItems()
     {
-        return $this->hasMany(orderItem::class,'orderId','id');
+        return $this->hasMany(OrderItem::class, 'orderId', 'id');
     }
 
-    // علاقة الطلبات بالعناصر
+    /**
+     * بديل أو تسمية أخرى لعلاقة العناصر
+     * يمكن استخدام $order->items للوصول للعناصر
+     */
     public function items()
     {
         return $this->hasMany(OrderItem::class, 'orderId');

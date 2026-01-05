@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
-    protected $fillable=
-    [
-        'name',
-        'imgUrl',
-        'location',
-        'description'
+    // الحقول التي يمكن تعبئتها جماعياً (Mass Assignment)
+    protected $fillable = [
+        'name',        // اسم القسم
+        'imgUrl',      // رابط صورة القسم
+        'description'  // وصف القسم
     ];
 
+    /**
+     * علاقة القسم بالأطباء
+     * كل قسم يمكن أن يحتوي على عدة أطباء
+     */
     public function doctors()
     {
-        return $this->hasMany(Doctor::class ,'departmentId', 'id');
+        return $this->hasMany(Doctor::class, 'departmentId', 'id');
     }
 }

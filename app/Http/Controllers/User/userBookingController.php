@@ -8,19 +8,30 @@ use App\Models\Booking;
 use App\Models\Appointment;
 use App\Models\Card;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserBookingController extends Controller
 {
-    // عرض نموذج الحجز
+    /* ================== عرض نموذج الحجز ================== */
     public function showBookingForm($appointmentId)
     {
+        // التأكد من أن المستخدم مسجل دخول
+        if (!Auth::check())
+        {
+           return redirect()->back()
+            ->with('warning', '⚠️ يجب تسجيل الدخول قبل الحجز.');
+        }
+
+        // جلب تفاصيل الموعد
         $appointment = Appointment::findOrFail($appointmentId);
         $user = Auth::user();
 
+        // حساب عدد الحجوزات الحالية للموعد
         $currentCount = Booking::where('appointmentId', $appointmentId)->count();
-        $expectedQueue = $currentCount + 1;
-        $peopleBefore = $currentCount;
+        $expectedQueue = $currentCount + 1; // رقم الدور المتوقع للمستخدم
+        $peopleBefore = $currentCount;       // عدد الأشخاص قبل المستخدم
 
+        // عرض صفحة الحجز مع المعلومات
         return view('visitor.booking.book_appointment', compact(
             'appointment',
             'user',
@@ -29,92 +40,85 @@ class UserBookingController extends Controller
         ));
     }
 
-    // تأكيد الحجز
+    /* ================== تأكيد الحجز ================== */
     public function confirmBooking(Request $request, $appointmentId)
     {
-        $appointment = Appointment::findOrFail($appointmentId);
         $user = Auth::user();
 
-        // تحقق من رصيد المستخدم
-        if ($user->balance < $appointment->price) {
-            return redirect()->back()->with('error', 'رصيد المحفظة غير كافي.');
+        try {
+            // استخدام Transaction لحماية البيانات من أي أخطاء أو Race Conditions
+            DB::transaction(function() use ($request, $appointmentId, $user) {
+
+                // قفل السطر لمنع أي مستخدم آخر من تعديل نفس الموعد في نفس الوقت
+                $appointment = Appointment::lockForUpdate()->findOrFail($appointmentId);
+
+                // تحقق من الحد الأقصى للحجوزات
+                $currentBookings = $appointment->bookings()->count();
+                if ($currentBookings >= $appointment->max_bookings)
+                {
+                    throw new \Exception('⚠️ تم اكتمال الحجوزات لهذا الموعد.');
+                }
+
+                // تحقق من رصيد المستخدم
+                if ($user->balance < $appointment->price) {
+                    throw new \Exception('⚠️ رصيد المحفظة غير كافي للحجز.');
+                }
+
+                // تحقق إذا المستخدم حجز هذا الموعد مسبقًا
+                $existingBooking = Booking::where('userId', $user->id)
+                                          ->where('appointmentId', $appointment->id)
+                                          ->first();
+                if ($existingBooking && !$request->has('confirm_double_booking'))
+                {
+                   return redirect()->back()
+                   ->with('warning', 'لقد حجزت هذا الموعد مسبقاً. إذا أردت الحجز مرة أخرى، يرجى تأكيد ذلك.');
+                }
+
+                // خصم الرصيد من المستخدم
+                $user->balance -= $appointment->price;
+                $user->save();
+
+                // احسب رقم الدور التالي في الطابور
+                $lastNumber = Booking::where('appointmentId', $appointment->id)->max('queue_number');
+                $queueNumber = $lastNumber ? $lastNumber + 1 : 1;
+
+                // إنشاء الحجز
+                Booking::create([
+                    'userName'      => $user->userName,
+                    'phone'         => $user->phone,
+                    'status'        => 'waiting',   // الحالة الافتراضية
+                    'note'          => $request->note ?? null,
+                    'userId'        => $user->id,
+                    'appointmentId' => $appointment->id,
+                    'queue_number'  => $queueNumber,
+                    'archived'      => false,       // غير مؤرشف
+                ]);
+            });
+
+            return redirect()->back()->with('success', '✅ تم الحجز بنجاح!');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
-
-        // تحقق من الحد الأقصى للحجوزات
-        $currentBookings = $appointment->bookings()->count();
-        if ($currentBookings >= $appointment->max_bookings) {
-            return redirect()->back()->with('error', 'تم اكتمال الحجوزات لهذا الموعد.');
-        }
-
-        // تحقق إذا المستخدم حجز هذا الموعد مسبقاً
-        $existingBooking = Booking::where('userId', $user->id)
-                                  ->where('appointmentId', $appointment->id)
-                                  ->first();
-
-        if ($existingBooking && !$request->has('confirm_double_booking')) {
-            return redirect()->back()->with(
-                'warning',
-                'لقد حجزت هذا الموعد مسبقاً. هل أنت متأكد من الحجز مرة أخرى؟'
-            );
-        }
-
-        // احسب رقم الدور التالي
-        $lastNumber = Booking::where('appointmentId', $appointment->id)->max('queue_number');
-        $queueNumber = $lastNumber ? $lastNumber + 1 : 1;
-
-        // خصم الرصيد
-        $user->balance -= $appointment->price;
-        $user->save();
-
-        // إنشاء الحجز مع رقم الدور
-        $booking = Booking::create([
-            'userName'      => $user->userName,
-            'phone'         => $user->phone,
-            'status'        => 'approved',
-            'note'          => $request->note ?? null,
-            'userId'        => $user->id,
-            'appointmentId' => $appointment->id,
-            'queue_number'  => $queueNumber,
-        ]);
-
-        return redirect()
-            ->route('user.booking.confirm', $booking->id)
-            ->with('success', 'تم الحجز بنجاح!');
     }
 
-    // صفحة تأكيد الحجز
-    public function bookingConfirm($bookingId)
-    {
-        $booking = Booking::findOrFail($bookingId);
-        $appointment = $booking->appointment;
-        $user = Auth::user();
-
-        // رقم الدور المتوقع وعدد الأشخاص قبل المستخدم
-        $lastNumber = Booking::where('appointmentId', $appointment->id)->max('queue_number');
-        $expectedQueue = $booking->queue_number ?? ($lastNumber ? $lastNumber : 1);
-        $peopleBefore = $expectedQueue - 1;
-
-        return view('visitor.booking.booking_confirm', compact(
-            'booking',
-            'appointment',
-            'user',
-            'expectedQueue',
-            'peopleBefore'
-        ));
-    }
-
-    // عرض كل حجوزات المستخدم
+    /* ================== عرض كل حجوزات المستخدم ================== */
     public function myBookings()
     {
         $user = Auth::user();
+
+        // جلب جميع الحجوزات الحالية (غير مؤرشفة)
         $bookings = Booking::with('appointment.doctor')
             ->where('userId', $user->id)
+            ->where('archived', false)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // أضف معلومات الطابور لكل حجز
+        // حساب الرقم المتوقع وعدد الأشخاص قبل كل حجز
         foreach ($bookings as $booking) {
-            $lastNumber = Booking::where('appointmentId', $booking->appointmentId)->max('queue_number');
+            $lastNumber = Booking::where('appointmentId', $booking->appointmentId)
+                                 ->where('archived', false)
+                                 ->max('queue_number');
             $booking->expectedQueue = $booking->queue_number ?? ($lastNumber ? $lastNumber : 1);
             $booking->peopleBefore = $booking->expectedQueue - 1;
         }
@@ -122,13 +126,30 @@ class UserBookingController extends Controller
         return view('User.profile.my_bookings', compact('bookings'));
     }
 
-    // شحن المحفظة
+    /* ================== أرشفة الحجز ================== */
+    public function archiveBooking($bookingId)
+    {
+        $booking = Booking::findOrFail($bookingId);
+
+        // التحقق من ملكية الحجز
+        if ($booking->userId != Auth::id()) {
+            return back()->with('error', 'ليس لديك صلاحية لأرشفة هذا الحجز.');
+        }
+
+        $booking->archived = true;
+        $booking->save();
+
+        return back()->with('success', 'تم أرشفة الحجز بنجاح.');
+    }
+
+    /* ================== شحن المحفظة ================== */
     public function rechargeWallet(Request $request)
     {
         $request->validate([
             'card_number' => 'required|string',
         ]);
 
+        // جلب الكرت والتحقق منه
         $card = Card::where('card_number', $request->card_number)->first();
 
         if (!$card) {
@@ -139,10 +160,12 @@ class UserBookingController extends Controller
             return back()->with('error', 'تم استخدام الكرت مسبقاً');
         }
 
+        // شحن رصيد المستخدم بقيمة الكرت
         $user = Auth::user();
         $user->balance += $card->category->price;
         $user->save();
 
+        // تمييز الكرت كمستخدم
         $card->used = true;
         $card->save();
 
@@ -152,35 +175,14 @@ class UserBookingController extends Controller
         );
     }
 
-    // إلغاء الحجز
-    public function cancelBooking($bookingId)
-    {
-        $booking = Booking::findOrFail($bookingId);
-
-        if ($booking->userId != Auth::id()) {
-            return back()->with('error', 'ليس لديك صلاحية لإلغاء هذا الحجز.');
-        }
-
-        $bookingTime = \Carbon\Carbon::parse($booking->created_at);
-        $now = \Carbon\Carbon::now();
-
-        if ($bookingTime->diffInHours($now) >= 3) {
-            return back()->with('error', 'انتهت صلاحية إلغاء هذا الحجز.');
-        }
-
-        $booking->delete();
-
-        return back()->with('success', 'تم إلغاء الحجز بنجاح.');
-    }
-
-    // حالة الطابور (JSON)
+    /* ================== حالة الطابور (JSON) ================== */
     public function queueStatus($appointmentId)
     {
         $count = Booking::where('appointmentId', $appointmentId)->count();
 
         return response()->json([
-            'current_queue'  => $count + 1,
-            'people_before'  => $count,
+            'current_queue' => $count + 1,
+            'people_before' => $count,
         ]);
     }
 }

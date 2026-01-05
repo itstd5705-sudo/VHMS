@@ -1,118 +1,128 @@
 @extends('layouts.app')
 @section('content')
-{{-- Hero Section --}}
-<section class="vh-hero-area">
-    <div class="vh-container-boxx">
-    <h2 class="vh-main-heading">خدماتنا الطبية الشاملة في مستشفى فينيسيا</h2>
-    <p class="vh-sub-text">
-    اكتشف مجموعة واسعة من الخدمات الطبية الحديثة، من الأشعة والتحاليل المخبرية إلى الرعاية النفسية والحرجة، مع أحدث الأجهزة وأفضل الكوادر.
-    </p>
-
-    </div>
-</section>
-{{-- Services Grid --}}
-<section id="services" class="py-5">
-    <div class="container">
-        <div class="row g-4 justify-content-center">
-
-            {{-- Service 1 --}}
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="service-card shadow-sm p-4 rounded-4 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="icon-wrap me-3">
-                            <i class="bi bi-heart-pulse-fill service-icon fs-2 text-primary"></i>
-                        </div>
-                        <h4 class="card-title mb-0">الأشعة والتصوير الطبي</h4>
+ <h2 class="gallery-title mb-3">مجموعة الخدمات التي تقدمها المستشفى  </h2>
+<section class="serv-section">
+        <div class="serv-cards-container">
+            <div class="serv-card">
+                <div class="serv-card-content">
+                    <div class="serv-text-side">
+                        <span class="serv-number">01</span>
+                        <h3>أمراض القلب</h3>
+                        <p>نقدم تشخيصاً دقيقاً وعلاجاً متطوراً لكافة أمراض القلب والأوعية الدموية باستخدام أحدث أجهزة القسطرة.<br>يعمل فريقنا على مدار الساعة لمراقبة الحالات الحرجة وتقديم الرعاية الوقائية اللازمة لسلامة عضلة القلب.<br>نضمن لكم رحلة علاجية متكاملة تبدأ من الفحص الدوري وتصل إلى أدق التدخلات الجراحية المتطورة.</p>
                     </div>
-                    <p class="card-text">
-                        نقدم خدمات التصوير بالرنين المغناطيسي، الأشعة السينية، والتصوير المقطعي المحوسب بأحدث الأجهزة.
-                    </p>
-                    <img src="{{ asset('image/photo_2025-11-08_14-10-00.jpg') }}" alt="Radiology" class="img-fluid rounded-3 mt-2">
+                    <div class="serv-image-side"><img src="{{ asset('image/تنزيل (2).jfif') }}"></div>
+                </div>
+            </div>
+            <div class="serv-card">
+                <div class="serv-card-content">
+                    <div class="serv-text-side">
+                        <span class="serv-number">02</span>
+                        <h3>قسم الطوارئ</h3>
+                        <p>وحدة الطوارئ مجهزة لاستقبال كافة الحالات الحرجة والطارئة على مدار 24 ساعة طوال أيام الأسبوع.<br>يضم القسم فريقاً من الأخصائيين المدربين على التعامل السريع مع الإصابات والحوادث والأزمات الصحية المفاجئة.<br>نعتمد بروتوكولات عالمية لضمان تقديم الإسعافات الأولية وتثبيت حالة المريض في أسرع وقت ممكن.</p>
+                    </div>
+                    <div class="serv-image-side"><img src="{{ asset('image/photo_2025-11-07_19-14-06.jpg') }}"></div>
+                </div>
+            </div>
+            <div class="serv-card">
+                <div class="serv-card-content">
+                    <div class="serv-text-side">
+                        <span class="serv-number">03</span>
+                        <h3>أنف وأذن وحنجرة</h3>
+                        <p>يوفر القسم رعاية متخصصة لاضطرابات السمع والتوازن ومشاكل الجيوب الأنفية المزمنة والحساسية.<br>نستخدم أحدث المناظير الطبية لتشخيص وعلاج أمراض الأحبال الصوتية وصعوبات البلع لدى الأطفال والكبار.<br>نتميز بإجراء عمليات زراعة القوقعة وتصحيح انحراف الحاجز الأنفي باستخدام تقنيات جراحية دقيقة وآمنة.</p>
+                    </div>
+                    <div class="serv-image-side"><img src="{{ asset('image/photo_2026-01-04_18-31-51.jpg') }}"></div>
+                </div>
+            </div>
+            <div class="serv-card">
+                <div class="serv-card-content">
+                    <div class="serv-text-side">
+                        <span class="serv-number">04</span>
+                        <h3>طب الأطفال</h3>
+                        <p>نقدم بيئة رعاية صديقة للطفل تشمل التطعيمات الأساسية ومتابعة النمو البدني والذهني منذ الولادة.<br>يختص أطباؤنا في علاج الأمراض الحادة والمزمنة وتوفير الدعم الغذائي والنفسي المناسب لكل مرحلة عمرية.<br>نحن نؤمن بأن وقاية الطفل اليوم هي أساس صحته في المستقبل، لذا نوفر فحوصات دورية شاملة.</p>
+                    </div>
+                    <div class="serv-image-side"><img src="{{ asset('image/photo_2025-11-08_14-09-59.jpg') }}"></div>
+                </div>
+            </div>
+            <div class="serv-card">
+                <div class="serv-card-content">
+                    <div class="serv-text-side">
+                        <span class="serv-number">05</span>
+                        <h3>الطب الباطني</h3>
+                        <p>يقوم استشاريونا بتشخيص وعلاج الأمراض الباطنية المعقدة مثل السكري وضغط الدم واضطرابات الجهاز الهضمي.<br>نركز على تقديم خطط علاجية شاملة تعتمد على الفحص السريري الدقيق والتحاليل المخبرية المتقدمة.<br>يهتم القسم بمتابعة المرضى ذوي الحالات المتعددة وتنسيق الرعاية الطبية بين مختلف التخصصات لضمان سلامتهم.</p>
+                    </div>
+                    <div class="serv-image-side"><img src="{{ asset('images/باطنيه.jpg') }}"></div>
+                </div>
+            </div>
+            <div class="serv-card">
+                <div class="serv-card-content">
+                    <div class="serv-text-side">
+                        <span class="serv-number">06</span>
+                        <h3>الجراحة والتخدير</h3>
+                        <p>نمتلك غرف عمليات مجهزة بالكامل لإجراء الجراحات العامة والدقيقة مع فريق تخدير عالي الكفاءة.<br>نطبق معايير صارمة للتعقيم والسلامة المهنية لضمان تقليل المخاطر الجراحية وسرعة تماثل المرضى للشفاء.<br>يتم تقييم كل حالة بدقة قبل الجراحة لضمان اختيار أنسب أنواع التخدير التي توفر أقصى درجات الراحة.</p>
+                    </div>
+                    <div class="serv-image-side"><img src="{{ asset('image/photo_2026-01-04_18-32-24.jpg') }}"></div>
+                </div>
+            </div>
+            <div class="serv-card">
+                <div class="serv-card-content">
+                    <div class="serv-text-side">
+                        <span class="serv-number">07</span>
+                        <h3>جراحة العظام</h3>
+                        <p>متخصصون في علاج الكسور وإصابات الملاعب وتبديل المفاصل الصناعية باستخدام أحدث التقنيات الطبية.<br>يوفر القسم حلولاً متطورة لمشاكل العمود الفقري والديسك وهشاشة العظام لضمان استعادة الحركة الطبيعية.<br>يتم دمج العلاج الجراحي مع برامج إعادة التأهيل الفيزيائي لضمان عودة المريض لممارسة حياته بفعالية.</p>
+                    </div>
+                    <div class="serv-image-side"><img src="{{ asset('images/ججراحة.jpg') }}"></div>
+                </div>
+            </div>
+            <div class="serv-card">
+                <div class="serv-card-content">
+                    <div class="serv-text-side">
+                        <span class="serv-number">08</span>
+                        <h3>طب العيون</h3>
+                        <p>نقدم فحوصات شاملة للنظر وعلاج أمراض الشبيكة والمياه الزرقاء والبيضاء بأحدث تقنيات الليزر والليزك.<br>يضم القسم وحدة مجهزة لجراحات العيون الدقيقة وتصحيح العيوب الانكسارية لضمان رؤية واضحة وصحية.<br>نهتم بتقديم حلول متكاملة لجميع الفئات العمرية بما في ذلك أمراض عيون الأطفال وحول العين.</p>
+                    </div>
+                    <div class="serv-image-side"><img src="{{ asset('images/طب العيون.jpg') }}"></div>
                 </div>
             </div>
 
-            {{-- Service 2 --}}
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-card shadow-sm p-4 rounded-4 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="icon-wrap me-3">
-                            <i class="bi bi-hdd-stack fs-2 text-primary"></i>
-                        </div>
-                        <h4 class="card-title mb-0">المختبرات والتحاليل الطبية</h4>
+            <div class="serv-card">
+                <div class="serv-card-content">
+                    <div class="serv-text-side">
+                        <span class="serv-number">09</span>
+                        <h3>الأمراض الجلدية</h3>
+                        <p>نوفر علاجاً متخصصاً لمشاكل الجلد وحب الشباب والاكزيما والصدفية باستخدام أحدث الأجهزة العلاجية.<br>يضم القسم وحدة متطورة لليزر والخدمات التجميلية غير الجراحية للعناية بصحة ونضارة البشرة والشعر.<br>يتم فحص الشامات والأورام الجلدية بدقة عالية لضمان التشخيص المبكر والعلاج الفعال لكل حالة.</p>
                     </div>
-                    <p class="card-text">
-                        إجراء جميع الفحوصات الكيميائية، الدموية، الميكروبيولوجية والباثولوجية بدقة عالية.
-                    </p>
-                    <img src="{{ asset('image/photo_2025-11-08_14-10-00.jpg') }}" alt="Laboratory" class="img-fluid rounded-3 mt-2">
+                    <div class="serv-image-side"><img src="{{ asset('image/جلدية.jpg') }}"></div>
                 </div>
             </div>
-
-            {{-- Service 3 --}}
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="service-card shadow-sm p-4 rounded-4 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="icon-wrap me-3">
-                            <i class="bi bi-capsule fs-2 text-primary"></i>
-                        </div>
-                        <h4 class="card-title mb-0">الصيدلية</h4>
+            <div class="serv-card">
+                <div class="serv-card-content">
+                    <div class="serv-text-side">
+                        <span class="serv-number">10</span>
+                        <h3>المختبرات الطبية</h3>
+                        <p>نقدم باقة واسعة من الفحوصات المخبرية الدقيقة التي تشمل تحاليل الدم والوراثة والهرمونات والسموم.<br>يتم إجراء كافة التحاليل بواسطة أجهزة أوتوماتيكية متطورة تضمن سرعة استخراج النتائج وبأعلى درجات الدقة.<br>يخضع المختبر لبرامج رقابة جودة داخلية وخارجية صارمة للتأكد من موثوقية كل فحص يتم إجراؤه.</p>
                     </div>
-                    <p class="card-text">
-                        توفير وتوزيع الأدوية والوصفات الطبية للمرضى الداخليين والخارجيين.
-                    </p>
-                    <img src="{{ asset('image/photo_2025-11-08_14-10-00.jpg') }}" alt="Pharmacy" class="img-fluid rounded-3 mt-2">
-                </div>
-            </div>
-
-            {{-- Service 4 --}}
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="service-card shadow-sm p-4 rounded-4 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="icon-wrap me-3">
-                            <i class="bi bi-emoji-smile fs-2 text-primary"></i>
-                        </div>
-                        <h4 class="card-title mb-0">الدعم النفسي والاجتماعي</h4>
-                    </div>
-                    <p class="card-text">
-                        تقديم خدمات الصحة النفسية ومساعدة المرضى وأسرهم في التعامل مع الآثار الاجتماعية والنفسية للمرض.
-                    </p>
-                    <img src="{{ asset('image/photo_2025-11-07_19-13-48.jpg') }}" alt="Psychological Support" class="img-fluid rounded-3 mt-2">
-                </div>
-            </div>
-
-            {{-- Service 5 --}}
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
-                <div class="service-card shadow-sm p-4 rounded-4 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="icon-wrap me-3">
-                            <i class="bi bi-heart fs-2 text-primary"></i>
-                        </div>
-                        <h4 class="card-title mb-0">الرعاية المتقدمة والحرجة</h4>
-                    </div>
-                    <p class="card-text">
-                        توفير مراقبة ورعاية متقدمة للمرضى ذوي الحالات الحرجة ورعاية مركزة ومراقبة عن كثب.
-                    </p>
-                    <img src="{{ asset('image/photo_2025-11-07_19-14-06.jpg') }}" alt="Critical Care" class="img-fluid rounded-3 mt-2">
-                </div>
-            </div>
-
-            {{-- Service 6 --}}
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="600">
-                <div class="service-card shadow-sm p-4 rounded-4 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="icon-wrap me-3">
-                            <i class="bi bi-ambulance fs-2 text-primary"></i>
-                        </div>
-                        <h4 class="card-title mb-0">الإسعاف والطوارئ</h4>
-                    </div>
-                    <p class="card-text">
-                        تقديم الرعاية العاجلة على مدار الساعة للحالات الحرجة والحوادث.
-                    </p>
-                    <img src="{{ asset('image/photo_2025-11-08_14-10-00.jpg') }}" alt="Emergency" class="img-fluid rounded-3 mt-2">
+                    <div class="serv-image-side"><img src="{{ asset('image/photo_2026-01-04_18-32-27.jpg') }}"></div>
                 </div>
             </div>
 
         </div>
-    </div>
-</section>
+    </section>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".serv-card");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    cards.forEach(card => observer.observe(card));
+});
+</script>
 
 @endsection

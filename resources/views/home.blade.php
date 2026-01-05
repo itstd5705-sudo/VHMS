@@ -1,13 +1,9 @@
 @extends('layouts.app')
 @section('content')
  <link rel="stylesheet" href="{{ asset('CSS/home.css')}}">
-
 </head>
     <section class="hero-section">
         <div class="hero-content">
-            <h1>مرحبا بكم في مستشفى فينيسيا <br> Venezia Hospital </h1>
-            <p>رعايتكم هي اهتمامنا الاول</p>
-
         </div>
     </section>
     <section class="action-bar">

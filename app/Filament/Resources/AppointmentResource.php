@@ -14,24 +14,33 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Table;
+use App\Filament\Traits\HasAutoTablePdf; // ✅ لإضافة زر PDF تلقائي
 
 class AppointmentResource extends Resource
 {
+    // الربط بنموذج Appointment
     protected static ?string $model = Appointment::class;
 
+    // أيقونة التنقل في لوحة Filament
     protected static ?string $navigationIcon = 'heroicon-s-calendar';
 
+    // مجموعة التنقل في لوحة Filament
     protected static ?string $navigationGroup = 'Doctors Management';
 
+    use HasAutoTablePdf;
+
+    // تعريف نموذج الفورم لإضافة/تعديل المواعيد
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                // اختيار الطبيب المرتبط بالموعد
                 Select::make('doctorId')
                     ->label('Doctor')
                     ->relationship('Doctor', 'fullName')
                     ->required(),
 
+                // اختيار يوم الموعد
                 Select::make('day')
                     ->label('Day')
                     ->options([
@@ -45,81 +54,89 @@ class AppointmentResource extends Resource
                     ])
                     ->required(),
 
+                // توقيت البداية والنهاية للموعد
                 TimePicker::make('from_time')->label('From Time')->required(),
                 TimePicker::make('to_time')->label('To Time')->required(),
 
+                // حالة الموعد: مفتوح أو مسكر
                 Select::make('status')
                     ->label('Status')
                     ->options([
-                        'available' => 'Available',
-                        'full' => 'Full',
-                        'cancelled' => 'Cancelled',
+                        'open' => 'open',
+                        'closed' => 'closed',
                     ])
                     ->required(),
 
+                // السعر والحد الأقصى للحجوزات
                 TextInput::make('price')->numeric()->required(),
                 TextInput::make('max_bookings')->numeric()->required(),
             ]);
     }
 
+    // تعريف جدول المواعيد في لوحة Filament
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                static::getAutoPdfAction(), // ✅ زر PDF
+            ])
             ->columns([
+                // اسم الطبيب المرتبط بالموعد
                 TextColumn::make('Doctor.fullName')
                     ->label('Doctor')
                     ->sortable()
-                    ->searchable()
-                    ->formatStateUsing(fn ($state) => mb_convert_encoding($state, 'UTF-8', 'UTF-8')),
+                    ->searchable(),
 
-                TextColumn::make('day')
-                    ->label('Day')
-                    ->sortable()
-                    ->formatStateUsing(fn ($state) => mb_convert_encoding($state, 'UTF-8', 'UTF-8')),
-
+                // اليوم والوقت
+                TextColumn::make('day')->label('Day')->sortable(),
                 TextColumn::make('from_time')->label('From'),
                 TextColumn::make('to_time')->label('To'),
 
+                // حالة الموعد مع تمييز اللون
                 BadgeColumn::make('status')
                     ->label('Status')
-                    ->getStateUsing(fn ($record) => match($record->status) {
-                        'available' => 'Available',
-                        'full' => 'Full',
-                        'cancelled' => 'Cancelled',
-                        default => $record->status,
-                    })
                     ->colors([
-                        'success' => fn ($record) => $record->status === 'available',
-                        'warning' => fn ($record) => $record->status === 'full',
-                        'danger'  => fn ($record) => $record->status === 'cancelled',
+                        'success' => 'open',
+                        'danger' => 'closed',
                     ])
                     ->sortable(),
 
+                // السعر والحد الأقصى للحجوزات
                 TextColumn::make('price')->sortable(),
                 TextColumn::make('max_bookings')->label('Max Bookings')->sortable(),
+
+                // تاريخ الإنشاء
                 TextColumn::make('created_at')->dateTime()->label('Created At'),
             ])
             ->filters([
-                //
+                // فلتر لحالة الموعد (مفتوح / مسكر)
+                Tables\Filters\SelectFilter::make('status')
+                    ->label('Status')
+                    ->options([
+                        'open' => 'Open',
+                        'closed' => 'Closed',
+                    ]),
             ])
             ->actions([
+                // أزرار تعديل وحذف لكل سجل
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
+                // الحذف الجماعي
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
 
+    // العلاقات (حالياً لا توجد علاقات إضافية)
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
+    // صفحات الموارد: القائمة، الإضافة، التعديل
     public static function getPages(): array
     {
         return [
